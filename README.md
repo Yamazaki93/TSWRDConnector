@@ -17,7 +17,7 @@ Hopefully, this makes your TSW experience better, more realistic and exciting.
  
  - This program is NOT endorsed by either P.I. Engineering (RailDriver) or Dovetail Games (TSW). This is simply a fan creation. I am NOT affilated with either of them.
 
- - It may be very flaky or doesn't work for your PC as it's not been well tested. Please use `Issues` to address any specific problems.
+ - It may be very flaky or doesn't work for your PC as it's not been well tested and work-in-progress. Please use `Issues` to discuss any specific problems.
 
  - No discussion/works here will be related to circumventing any digital rights protection mechanisms. Please supports the developers! (Yes, even though there's no official RailDriver support, it is still a very good game)
 
@@ -38,6 +38,12 @@ Hopefully, this makes your TSW experience better, more realistic and exciting.
  8. If the train is supported (see below for full list of supported trains), your RailDriver will return to display "rd". You may switch window the the program and see the name of the train being displayed.
  9. That's it. Enjoy.
 
+## Switching Trains
+
+  1. To switch train in session. Click the top right most function key (to the left of the "UP" key of the up-down combo key. Sry, key legend coming soon.)
+  2. Observe the RailDriver LED display "CL" again.
+  3. You can now sit down in another train and repeat the calibration step (step 7. above).
+
 ## Supported Trains and Functionalities
 
 For now, the focus has been on supporting the control levers in the train. Limited buttons are supported (Alerter, Bell, Sand etc.). More supports are yet to come.
@@ -48,6 +54,12 @@ The full list of supported trains and their respective packages:
  - Mann-Spessart Bahn BR185.2
  - Mann-Spessart Bahn DBpbzfa
  - CSX Heavy Haul AC4400CW
+
+## Known Issues
+
+ - Limited buttons support only, EStop, Alert, Bell, Sand, Pantograph, Horn, PZB are supported. Wiper, Lights and other function buttons are NOT supported at the moment.
+ - Lever may still "run away," especially on those with small knotches. I will try to improve them in future releases. Meanwhile, tapping the corresponding control key on the keyboard should get them back in-sync.
+ - Lever adjustment speed is determined by the game. So it may run slow depending on which lever you are adjusting. But it should still go to the commanded position on RD.
 
 ## Building
 
