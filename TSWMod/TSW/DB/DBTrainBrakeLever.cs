@@ -12,10 +12,6 @@ namespace TSWMod.TSW.DB
         protected override float TargetValuePreTransform(float raw)
         {
             var target = 1 - Math.Min(Convert.ToSingle(Math.Round(raw * 10f, 0) / 10f), 1f);
-            if (Math.Abs(target - CurrentValue) < 0.1)
-            {
-                return CurrentValue;
-            }
             return target;
         }
 
