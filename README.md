@@ -1,6 +1,6 @@
 # TSWRDConnector
 
-RailDriver connector program for Train Sim World. This program connects to RailDriver via USB, reads control lever value from TSW and synchornizes them by applying keystrokes.
+RailDriver connector for Train Sim World. This program connects to RailDriver via USB, reads control lever value on RailDriver and from TSW and synchornizes them by applying keystrokes.
 
 As such:
 
@@ -28,19 +28,27 @@ Hopefully, this makes your TSW experience better, more realistic and exciting.
 
 ## Getting Started
 
+Here's a video showing how it works.
+
+[![Alt text](https://img.youtube.com/vi/ZyiEsUbQjms/0.jpg)](https://youtu.be/ZyiEsUbQjms)
+
+You do NOT need MacroWorks running for this to work. In fact, it may not work if MacroWorks is running so exit it first.
+
+Note, you will need to switch the TSW keyboard mappings back to default if you have adjusted them. Otherwise it won't work.
+
  1. Dowload the program from `Release` page, unzip it.
  2. Run TSW 2020.
  3. Run `TSWMod.exe` under administrator mode.
  4. Click `Load RailDriver Calibration` and browse to the RailDriver calibration file `ModernCalibration.rdm`. (It should be under `<Your MacroWorks Install Location>/Devices/RailDriver`).
  5. Load up a game in TSW.
  6. IMPORTANT: In a moment, observe your RailDriver LED, it should read "CL" 
- 7. After the game loads, while the RailDriver reads "CL". Honk the horn of the train you are controlling (sit down first). You will need to do it a couple times, probalby 2-3.
- 8. If the train is supported (see below for full list of supported trains), your RailDriver will return to display "rd". You may switch window the the program and see the name of the train being displayed.
+ 7. After the game loads, while the RailDriver reads "CL". Sit down at the train you are controlling and honk the horn. You will need to do it just a couple times, probalby 2-3.
+ 8. If the train is supported (see below for full list of supported trains), your RailDriver will return to display "rd". You may switch window to the connector and see the name of the train being displayed.
  9. That's it. Enjoy.
 
 ## Switching Trains
 
-  1. To switch train in session. Click the top right most function key (to the left of the "UP" key of the up-down combo key. Sry, key legend coming soon.)
+  1. To switch train in session. Click the top right most function key (to the left of the "UP" key of the up-down combo key.)
   2. Observe the RailDriver LED display "CL" again.
   3. You can now sit down in another train and repeat the calibration step (step 7. above).
 
@@ -57,13 +65,14 @@ The full list of supported trains and their respective packages:
 
 ## Known Issues
 
- - Limited buttons support only, EStop, Alert, Bell, Sand, Pantograph, Horn, PZB are supported. Wiper, Lights and other function buttons are NOT supported at the moment.
- - Lever may still "run away," especially on those with small knotches. I will try to improve them in future releases. Meanwhile, tapping the corresponding control key on the keyboard should get them back in-sync.
- - Lever adjustment speed is determined by the game. So it may run slow depending on which lever you are adjusting. But it should still go to the commanded position on RD.
+ - Limited buttons support only, EStop, Alert, Bell, Sand, Pantograph, Horn, PZB are supported. Wiper, Lights and other function buttons are NOT supported at the moment. Key legend coming soon.
+ - Lever may still "run away" in some cases, especially on those with small knotches. I will try to improve them in a future release. Meanwhile, tapping the corresponding control key on the keyboard briefly (1 or 2 times) should get them back in-sync.
+ - Lever adjustment speed is determined by the game. So it may run slow depending on which lever you are adjusting. But it should still go to the commanded position on RailDriver.
+ - In very rare cases, the connector may mis-identify your train or show wrong status. In this case, restarting the connector mid-session should fix this. The connector should directly enter Calibration mode if it's started after the session is loaded.
 
 ## Building
 
-To build this from source, Visual Studio 2019, C# WindowsForm Development Package is needed.
+To build this from source, Visual Studio 2019, C# WindowsForm Development Option is needed.
 
 ## Credits
 
