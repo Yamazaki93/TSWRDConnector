@@ -1,7 +1,7 @@
 ﻿using System;
 using Memory;
 
-namespace TSWMod.TSW.DB
+namespace TSWMod.TSW
 {
     class HornLever : TSWLever
     {

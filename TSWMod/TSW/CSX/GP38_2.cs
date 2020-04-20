@@ -84,7 +84,7 @@ namespace TSWMod.TSW.CSX
 
         public JObject GetConfiguration()
         {
-            return new JObject();
+            return null;
         }
 
         public string Name => "GP38-2";

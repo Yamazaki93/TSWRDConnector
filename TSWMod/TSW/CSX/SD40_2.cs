@@ -81,7 +81,7 @@ namespace TSWMod.TSW.CSX
 
         public JObject GetConfiguration()
         {
-            return new JObject();
+            return null;
         }
 
         public string Name => "SD40-2";

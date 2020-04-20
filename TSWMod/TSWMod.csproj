@@ -120,7 +120,7 @@
     <Compile Include="TSW\CSX\PlusMinusReverser.cs" />
     <Compile Include="TSW\CSX\AC4400CWThrottle.cs" />
     <Compile Include="TSW\CSX\EightNotchThrottle.cs" />
-    <Compile Include="TSW\CSX\HornButton.cs" />
+    <Compile Include="TSW\HornButton.cs" />
     <Compile Include="TSW\CSX\SD40_2.cs" />
     <Compile Include="TSW\CSX\SD40_2DynamicBrake.cs" />
     <Compile Include="TSW\CSX\SD40_2IndependentBrake.cs" />
@@ -131,10 +131,12 @@
     <Compile Include="TSW\DB\DBDirectBrakeLever.cs" />
     <Compile Include="TSW\DB\DBThrottleLever.cs" />
     <Compile Include="TSW\DB\DBTrainBrakeLever.cs" />
-    <Compile Include="TSW\DB\HornLever.cs" />
+    <Compile Include="TSW\HornLever.cs" />
     <Compile Include="TSW\ILocomotive.cs" />
     <Compile Include="TSW\MemExtensions.cs" />
+    <Compile Include="TSW\NEC\ACSMasterController.cs" />
     <Compile Include="TSW\NEC\ACS_64.cs" />
+    <Compile Include="TSW\NEC\ACS_64AutoBrake.cs" />
     <Compile Include="TSW\TSWActiveLocomotiveChangedEvent.cs" />
     <Compile Include="TSW\TSWButton.cs" />
     <Compile Include="TSW\TSWConnectorStatus.cs" />

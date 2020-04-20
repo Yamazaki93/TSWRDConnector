@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading;
 using System.Timers;
 using Memory;
+using Newtonsoft.Json.Linq;
 using TSWMod.RailDriver;
 using TSWMod.TSW.CSX;
 using TSWMod.TSW.DB;
+using TSWMod.TSW.NEC;
 using Timer = System.Timers.Timer;
 
 namespace TSWMod.TSW
@@ -49,6 +51,22 @@ namespace TSWMod.TSW
             _foundLocomotives = new Dictionary<UIntPtr, ILocomotive>();
             rd.ButtonPressed += RdOnButtonPressed;
             rd.ButtonReleased += RdOnButtonReleased;
+        }
+
+        public JObject GetCurrentLocomotiveConfig()
+        {
+            lock (_currentLocomotiveLock)
+            {
+                return _currentLocomotive?.GetConfiguration();
+            }
+        }
+
+        public void SetCurrentLocomotiveConfig(JObject newConfig)
+        {
+            lock (_currentLocomotiveLock)
+            {
+                _currentLocomotive?.SetConfiguration(newConfig);
+            }
         }
 
         private void RdOnButtonReleased(object sender, RailDriverButtonEvent e)
@@ -189,6 +207,10 @@ namespace TSWMod.TSW
                 else if (possibleName.Contains(GP38_2.NamePartial))
                 {
                     _foundLocomotives.Add(ptr, new GP38_2(_m, ptr, _currentProcess.MainWindowHandle));
+                }
+                else if (possibleName.Contains(ACS_64.NamePartial))
+                {
+                    _foundLocomotives.Add(ptr, new ACS_64(_m, ptr, _currentProcess.MainWindowHandle));
                 }
             }
         }

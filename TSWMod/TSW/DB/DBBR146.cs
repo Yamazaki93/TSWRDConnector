@@ -79,7 +79,7 @@ namespace TSWMod.TSW.DB
 
         public JObject GetConfiguration()
         {
-            return new JObject();
+            return null;
         }
 
         public string Name => "DB BR146-2";

@@ -75,7 +75,7 @@ namespace TSWMod.TSW.CSX
 
         public JObject GetConfiguration()
         {
-            return new JObject();
+            return null;
         }
 
         public string Name => "AC4400CW";

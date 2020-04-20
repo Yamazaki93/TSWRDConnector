@@ -3,9 +3,11 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NLog;
 using TSWMod.RailDriver;
 using TSWMod.TSW;
+using TSWMod.TSW.NEC;
 
 namespace TSWMod
 {
@@ -31,6 +33,7 @@ namespace TSWMod
             panelRdControls.Visible = false;
             lblLoadCalibrationPrompt.Visible = true;
             lblActiveTrain.Text = "-";
+            groupBoxTrainConfig.Visible = false;
 
             _rdConnector.Connected += RdConnectorOnConnected;
             _tswConnector.StatusChanged += TSWConnectorOnConnected; 
@@ -80,6 +83,63 @@ namespace TSWMod
         private void LocomotiveChanged(object sender, TSWActiveLocomotiveChangedEvent e)
         {
             lblActiveTrain.BeginInvoke(new Action(() => { lblActiveTrain.Text = e.LocomotiveName; }));
+            _currentTrain = e.LocomotiveName;
+            groupBoxTrainConfig.BeginInvoke(new Action(() =>
+            {
+                if (_tswConnector.GetCurrentLocomotiveConfig() != null)
+                {
+                    groupBoxTrainConfig.Visible = true;
+                    groupBoxTrainConfig.Text = _currentTrain;
+                    ShowTrainConfig();
+                }
+                else
+                {
+                    groupBoxTrainConfig.Visible = false;
+                }
+            }));
+        }
+
+        private void ShowTrainConfig()
+        {
+            // Hide all train configs
+            panelACS64Config.Visible = false;
+
+            try
+            {
+                if (_currentTrain == "ACS-64")
+                {
+                    var cfg = _tswConnector.GetCurrentLocomotiveConfig();
+                    panelACS64Config.Visible = true;
+                    checkboxACSConfigMasterController.Checked = cfg[ACS_64.MasterControllerConfigKey].Value<string>()
+                        .Equals(ACS_64.MasterControllerFollowTSW);
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e);
+            }
+        }
+
+        private void checkboxACSConfigMasterController_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_currentTrain == "ACS-64")
+            {
+                SetACS64Config();
+            }
+        }
+
+        private void SetACS64Config()
+        {
+            var cfg = new JObject
+            {
+                {
+                    ACS_64.MasterControllerConfigKey,
+                    checkboxACSConfigMasterController.Checked
+                        ? ACS_64.MasterControllerFollowTSW
+                        : ACS_64.MasterControllerFollowRD
+                }
+            };
+            _tswConnector.SetCurrentLocomotiveConfig(cfg);
         }
 
         private void RdConnectorOnLeverChanged(object sender, RailDriverLeverUpdatedEvent e)
@@ -188,5 +248,7 @@ namespace TSWMod
         private readonly RailDriverConnector _rdConnector;
         private readonly TSWConnector _tswConnector;
         private ApplicationSettings _settings;
+        private string _currentTrain;
+
     }
 }

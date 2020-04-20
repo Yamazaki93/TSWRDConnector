@@ -38,6 +38,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupTSW = new System.Windows.Forms.GroupBox();
+            this.lblActiveTrain = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.lblMap = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panelRdControls = new System.Windows.Forms.Panel();
@@ -50,12 +52,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblLoadCalibrationPrompt = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblActiveTrain = new System.Windows.Forms.Label();
+            this.groupBoxTrainConfig = new System.Windows.Forms.GroupBox();
+            this.panelACS64Config = new System.Windows.Forms.Panel();
+            this.checkboxACSConfigMasterController = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupTSW.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panelRdControls.SuspendLayout();
+            this.groupBoxTrainConfig.SuspendLayout();
+            this.panelACS64Config.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -138,6 +143,26 @@
             this.groupTSW.TabIndex = 1;
             this.groupTSW.TabStop = false;
             this.groupTSW.Text = "TSW";
+            // 
+            // lblActiveTrain
+            // 
+            this.lblActiveTrain.AutoSize = true;
+            this.lblActiveTrain.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblActiveTrain.Location = new System.Drawing.Point(103, 44);
+            this.lblActiveTrain.Name = "lblActiveTrain";
+            this.lblActiveTrain.Size = new System.Drawing.Size(80, 18);
+            this.lblActiveTrain.TabIndex = 2;
+            this.lblActiveTrain.Text = "ActiveTrain";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label7.Location = new System.Drawing.Point(9, 44);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(88, 18);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Active Train:";
             // 
             // lblMap
             // 
@@ -262,31 +287,42 @@
             this.lblLoadCalibrationPrompt.Text = "Please Load Calibration First";
             this.lblLoadCalibrationPrompt.Visible = false;
             // 
-            // label7
+            // groupBoxTrainConfig
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label7.Location = new System.Drawing.Point(9, 44);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(88, 18);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Active Train:";
+            this.groupBoxTrainConfig.Controls.Add(this.panelACS64Config);
+            this.groupBoxTrainConfig.Location = new System.Drawing.Point(12, 231);
+            this.groupBoxTrainConfig.Name = "groupBoxTrainConfig";
+            this.groupBoxTrainConfig.Size = new System.Drawing.Size(776, 278);
+            this.groupBoxTrainConfig.TabIndex = 3;
+            this.groupBoxTrainConfig.TabStop = false;
+            this.groupBoxTrainConfig.Text = "Train";
             // 
-            // lblActiveTrain
+            // panelACS64Config
             // 
-            this.lblActiveTrain.AutoSize = true;
-            this.lblActiveTrain.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblActiveTrain.Location = new System.Drawing.Point(103, 44);
-            this.lblActiveTrain.Name = "lblActiveTrain";
-            this.lblActiveTrain.Size = new System.Drawing.Size(80, 18);
-            this.lblActiveTrain.TabIndex = 2;
-            this.lblActiveTrain.Text = "ActiveTrain";
+            this.panelACS64Config.Controls.Add(this.checkboxACSConfigMasterController);
+            this.panelACS64Config.Location = new System.Drawing.Point(7, 20);
+            this.panelACS64Config.Name = "panelACS64Config";
+            this.panelACS64Config.Size = new System.Drawing.Size(763, 252);
+            this.panelACS64Config.TabIndex = 0;
+            // 
+            // checkboxACSConfigMasterController
+            // 
+            this.checkboxACSConfigMasterController.AutoSize = true;
+            this.checkboxACSConfigMasterController.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.checkboxACSConfigMasterController.Location = new System.Drawing.Point(3, 3);
+            this.checkboxACSConfigMasterController.Name = "checkboxACSConfigMasterController";
+            this.checkboxACSConfigMasterController.Size = new System.Drawing.Size(237, 24);
+            this.checkboxACSConfigMasterController.TabIndex = 0;
+            this.checkboxACSConfigMasterController.Text = "Master Controller Follow TSW";
+            this.checkboxACSConfigMasterController.UseVisualStyleBackColor = true;
+            this.checkboxACSConfigMasterController.CheckedChanged += new System.EventHandler(this.checkboxACSConfigMasterController_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 615);
+            this.Controls.Add(this.groupBoxTrainConfig);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupTSW);
             this.Controls.Add(this.groupBox1);
@@ -302,6 +338,9 @@
             this.groupBox2.PerformLayout();
             this.panelRdControls.ResumeLayout(false);
             this.panelRdControls.PerformLayout();
+            this.groupBoxTrainConfig.ResumeLayout(false);
+            this.panelACS64Config.ResumeLayout(false);
+            this.panelACS64Config.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -331,6 +370,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblActiveTrain;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.GroupBox groupBoxTrainConfig;
+        private System.Windows.Forms.Panel panelACS64Config;
+        private System.Windows.Forms.CheckBox checkboxACSConfigMasterController;
     }
 }
 
