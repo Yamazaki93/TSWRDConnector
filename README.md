@@ -63,9 +63,10 @@ The full list of supported trains and their respective packages:
  - Mann-Spessart Bahn DBpbzfa
  - CSX Heavy Haul AC4400CW
 
-## Known Issues
+## Known Issues and Limitations
 
  - Limited buttons support only, EStop, Alert, Bell, Sand, Pantograph, Horn, PZB are supported. Wiper, Lights and other function buttons are NOT supported at the moment. Key legend coming soon.
+ - In case of locomotive with 2 cabs, only the front cab is supported at the moment. (Back cab support coming soon)
  - Lever may still "run away" in some cases, especially on those with small knotches. I will try to improve them in a future release. Meanwhile, tapping the corresponding control key on the keyboard briefly (1 or 2 times) should get them back in-sync.
  - Lever adjustment speed is determined by the game. So it may run slow depending on which lever you are adjusting. But it should still go to the commanded position on RailDriver.
  - In very rare cases, the connector may mis-identify your train or show wrong status. In this case, restarting the connector mid-session should fix this. The connector should directly enter Calibration mode if it's started after the session is loaded.
