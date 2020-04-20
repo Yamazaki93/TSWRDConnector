@@ -35,6 +35,11 @@ namespace TSWMod.TSW.CSX
             {
                 return 0.2f + 0.4f * raw; // 0.2 - 0.6 = brake range;
             }
+
+            if (raw < 1)
+            {
+                return 0.65f;
+            }
             return 0.85f;   // > 0.85 = handle off
         }
 

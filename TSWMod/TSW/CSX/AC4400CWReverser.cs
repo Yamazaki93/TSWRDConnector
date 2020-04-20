@@ -11,7 +11,7 @@ namespace TSWMod.TSW.CSX
     {
         public AC4400CWReverser(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, true)
         {
-            NotchRampUp = 30;
+            NotchRampUp = 7;
         }
 
         protected override float TargetValuePreTransform(float raw)

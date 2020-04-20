@@ -41,7 +41,7 @@ namespace TSWMod.TSW
             _trainEnumerator.Elapsed += TrainEnumeratorOnElapsed;
             _calibrationChecker = new Timer(500) {AutoReset = true};
             _calibrationChecker.Elapsed += CalibrationCheckerOnElapsed;
-            _tswControlLoop = new Timer(5) {AutoReset = true};
+            _tswControlLoop = new Timer(20) {AutoReset = true};
             _tswControlLoop.Elapsed += TswControlLoopOnElapsed;
             _currentMap = "";
             _currentLocomotiveLock = new object();

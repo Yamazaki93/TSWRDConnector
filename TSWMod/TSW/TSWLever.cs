@@ -88,7 +88,7 @@ namespace TSWMod.TSW
             _m.ReadFloat(_m.GetCodeRepresentation((UIntPtr)((ulong)_basePtr + AbsoluteValueOffset)));
         protected IntPtr HWND => _hWnd;
 
-        protected int NotchCoolOff = 30;  // A cool off period for notch like lever
+        protected int NotchCoolOff = 7;  // A cool off period for notch like lever
         protected int NotchRampUp = 0;  // Ramp up period for notch like lever (for slow notches)
         private float _previousDiff;
         private readonly Mem _m;
