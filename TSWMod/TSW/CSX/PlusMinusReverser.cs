@@ -7,9 +7,10 @@ using Memory;
 
 namespace TSWMod.TSW.CSX
 {
-    class AC4400CWReverser : TSWLever
+    // Reverser with notch, +1 = Forward, 0 = Neutral, -1 = Reverse
+    class PlusMinusReverser : TSWLever
     {
-        public AC4400CWReverser(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, true)
+        public PlusMinusReverser(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, true)
         {
             NotchRampUp = 7;
         }

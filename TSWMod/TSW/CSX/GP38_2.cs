@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Memory;
 using Newtonsoft.Json.Linq;
 using TSWMod.RailDriver;
 
 namespace TSWMod.TSW.CSX
 {
-    class AC4400CW : ILocomotive
+
+    // GP38-2 is almost identical to SD40-2
+    class GP38_2 : ILocomotive
     {
-        public const string NamePartial = "AC4400CW";
+        public const string NamePartial = "GP38-2";
         private readonly IDictionary<int, InputHelpers.VirtualKeyStates> DefaultKeyMappings = new Dictionary<int, InputHelpers.VirtualKeyStates>
         {
             { 36, InputHelpers.VirtualKeyStates.VK_BACK },  // Emergency brake
@@ -19,22 +24,24 @@ namespace TSWMod.TSW.CSX
             { 41, InputHelpers.VirtualKeyStates.VK_B },
             { 42, InputHelpers.VirtualKeyStates.VK_SPACE },   // Horn
             { 43, InputHelpers.VirtualKeyStates.VK_SPACE },
-        }; 
+        };
 
-        public AC4400CW(Mem m, UIntPtr basePtr, IntPtr hWnd)
+        public GP38_2(Mem m, UIntPtr basePtr, IntPtr hWnd)
         {
             _m = m;
             _basePtr = basePtr;
             _hornButton = new HornButton(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0948)));
-            _throttle = new AC4400CWThrottle(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A98)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0938)));
+            _throttle = new EightNotchThrottle(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0928)));
             _reverser = new PlusMinusReverser(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0AA0)));
-            _independentBrake = new AC4400CWIndependentBrake(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A90)));
-            _autoBrake = new AC4400CWAutoBrake(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A88)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0930)));
+            _independentBrake = new SD40_2IndependentBrake(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x06C8)));
+            _autoBrake = new SD40_2AutoBrake(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0800)));
+            _dynamicBrake = new SD40_2DynamicBrake(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0750)));
         }
 
         public bool CheckPlayerCalibration()
@@ -54,10 +61,11 @@ namespace TSWMod.TSW.CSX
 
         public void OnControlLoop(RailDriverLeverState state, int[] pressedButtons)
         {
-            _throttle.OnControlLoop(_throttle.TranslateCombinedValue(state.ThrottleTranslated, state.DynamicBrakeTranslated));
+            _throttle.OnControlLoop(state.ThrottleTranslated);
             _reverser.OnControlLoop(state.ReverserTranslated);
             _independentBrake.OnControlLoop(state.IndependentBrake);
             _autoBrake.OnControlLoop(state.AutoBrakeTranslated);
+            _dynamicBrake.OnControlLoop(state.DynamicBrakeTranslated);
         }
 
         public void Close()
@@ -78,15 +86,16 @@ namespace TSWMod.TSW.CSX
             return new JObject();
         }
 
-        public string Name => "AC4400CW";
+        public string Name => "GP38-2";
 
         private int _hornUse;
         private readonly TSWButton _hornButton;
         private readonly Mem _m;
         private readonly UIntPtr _basePtr;
-        private readonly AC4400CWThrottle _throttle;
+        private readonly EightNotchThrottle _throttle;
         private readonly PlusMinusReverser _reverser;
-        private readonly AC4400CWIndependentBrake _independentBrake;
-        private readonly AC4400CWAutoBrake _autoBrake;
+        private readonly SD40_2IndependentBrake _independentBrake;
+        private readonly SD40_2AutoBrake _autoBrake;
+        private readonly SD40_2DynamicBrake _dynamicBrake;
     }
 }

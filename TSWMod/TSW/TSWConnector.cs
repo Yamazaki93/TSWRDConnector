@@ -182,6 +182,14 @@ namespace TSWMod.TSW
                 {
                     _foundLocomotives.Add(ptr, new AC4400CW(_m, ptr, _currentProcess.MainWindowHandle));
                 }
+                else if (possibleName.Contains(SD40_2.NamePartial))
+                {
+                    _foundLocomotives.Add(ptr, new SD40_2(_m, ptr, _currentProcess.MainWindowHandle));
+                }
+                else if (possibleName.Contains(GP38_2.NamePartial))
+                {
+                    _foundLocomotives.Add(ptr, new GP38_2(_m, ptr, _currentProcess.MainWindowHandle));
+                }
             }
         }
 
