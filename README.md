@@ -77,7 +77,7 @@ To build this from source, Visual Studio 2019, C# WindowsForm Development Option
 
 ## Credits
 
-Big shout-out to Gandalf @ railsim-fr.com and crrispy on Steam. Their detailed scripts really inspired this work. You can find them at [here](https://www.railsim-fr.com/forum/index.php?/files/file/1682-train-sim-world-raildriver-interface). Thread on [RailsimFR](https://www.railsim-fr.com/forum/index.php?/topic/12446-tsw-et-raildriver-cest-parti) (in french)
+Big shout-out to Gandalf @ railsim-fr.com. The detailed scripts really inspired this work. You can find them at [here](https://www.railsim-fr.com/forum/index.php?/files/file/1682-train-sim-world-raildriver-interface). Thread on [RailsimFR](https://www.railsim-fr.com/forum/index.php?/topic/12446-tsw-et-raildriver-cest-parti) (in french)
 
 ## Related Links
 
