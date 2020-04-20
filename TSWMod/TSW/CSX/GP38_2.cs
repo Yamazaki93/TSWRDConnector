@@ -11,6 +11,7 @@ namespace TSWMod.TSW.CSX
 {
 
     // GP38-2 is almost identical to SD40-2
+    // NEC GP38-2 is the same as this one
     class GP38_2 : ILocomotive
     {
         public const string NamePartial = "GP38-2";

@@ -134,6 +134,7 @@
     <Compile Include="TSW\DB\HornLever.cs" />
     <Compile Include="TSW\ILocomotive.cs" />
     <Compile Include="TSW\MemExtensions.cs" />
+    <Compile Include="TSW\NEC\ACS_64.cs" />
     <Compile Include="TSW\TSWActiveLocomotiveChangedEvent.cs" />
     <Compile Include="TSW\TSWButton.cs" />
     <Compile Include="TSW\TSWConnectorStatus.cs" />
