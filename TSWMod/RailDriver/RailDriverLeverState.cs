@@ -3,7 +3,7 @@
     class RailDriverLeverState
     {
         public static readonly RailDriverLeverState Invalid = 
-            new RailDriverLeverState(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            new RailDriverLeverState(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false);
         public RailDriverLeverState(
             float reverser, 
             float throttle, 
@@ -14,7 +14,8 @@
             float reverserTranslated, 
             float throttleTranslated, 
             float dynamicBrakeTranslated, 
-            float autoBrakeTranslated)
+            float autoBrakeTranslated,
+            bool bailOff)
         {
             Reverser = reverser;
             Throttle = throttle;
@@ -26,6 +27,7 @@
             ThrottleTranslated = throttleTranslated;
             DynamicBrakeTranslated = dynamicBrakeTranslated;
             AutoBrakeTranslated = autoBrakeTranslated;
+            BailOff = bailOff;
         }
 
         public float Reverser { get; }
@@ -39,5 +41,7 @@
         public float ThrottleTranslated { get; }   // 0 - 1
         public float DynamicBrakeTranslated { get; }   // 0 - 1
         public float AutoBrakeTranslated { get; }  // 0 - 1 = Full auto brake range, 2 = emergency
+
+        public bool BailOff { get; }
     }
 }
