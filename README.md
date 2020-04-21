@@ -17,9 +17,10 @@ Hopefully, this makes your TSW experience better, more realistic and exciting.
  
  - This program is NOT endorsed by either P.I. Engineering (RailDriver) or Dovetail Games (TSW). This is simply a fan creation. I am NOT affilated with either of them.
 
- - It may be very flaky or doesn't work for your PC as it's not been well tested and work-in-progress. Please use `Issues` to discuss any specific problems.
+ - Please use `Issues` to discuss any specific problems or request new features.
 
  - No discussion/works here will be related to circumventing any digital rights protection mechanisms. Please supports the developers! (Yes, even though there's no official RailDriver support, it is still a very good game)
+
 
 ## Prerequisites
 
