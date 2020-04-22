@@ -73,6 +73,10 @@ namespace TSWMod.TSW.NEC
 
         public void OnControlLoop(RailDriverLeverState state, int[] pressedButtons)
         {
+            if (!state.BailOff)
+            {
+                _independentBrakeF.DisengageBailOffIfNeeded();
+            }
             if (_config[MasterControllerConfigKey].Value<string>().Equals(MasterControllerFollowRD))
             {
                 _masterControlF.OnControlLoop(_masterControlF.TranslateCombinedValue(state.ThrottleTranslated,
@@ -87,6 +91,11 @@ namespace TSWMod.TSW.NEC
 
             _independentBrakeF.OnControlLoop(state.IndependentBrake);
             _autoBrakeF.OnControlLoop(state.AutoBrakeTranslated);
+
+            if (state.BailOff)
+            {
+                _independentBrakeF.EngageBailOffIfNeeded();
+            }
         }
 
         public void Close()
