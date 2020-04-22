@@ -20,6 +20,11 @@ namespace TSWMod.TSW.CSX
 
         protected override void OnDifferentValue(float diff)
         {
+            if (_bailOff)
+            {
+                return;
+            }
+
             if (diff < 0)
             {
                 if (_currentKeyDown == ']')
@@ -46,7 +51,25 @@ namespace TSWMod.TSW.CSX
             InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_6);
         }
 
+        public void EngageBailOffIfNeeded()
+        {
+            if (!_bailOff && CurrentValue.AlmostEquals(0.2f))
+            {
+                _bailOff = true;
+                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
+            }
+        }
+
+        public void DisengageBailOffIfNeeded()
+        {
+            if (_bailOff)
+            {
+                InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
+                _bailOff = false;
+            }
+        }
 
         private char _currentKeyDown = ' ';
+        private bool _bailOff;
     }
 }

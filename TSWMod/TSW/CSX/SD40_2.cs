@@ -59,11 +59,19 @@ namespace TSWMod.TSW.CSX
 
         public void OnControlLoop(RailDriverLeverState state, int[] pressedButtons)
         {
+            if (!state.BailOff)
+            {
+                _independentBrake.DisengageBailOffIfNeeded();
+            }
             _throttle.OnControlLoop(state.ThrottleTranslated);
             _reverser.OnControlLoop(state.ReverserTranslated);
             _independentBrake.OnControlLoop(state.IndependentBrake);
             _autoBrake.OnControlLoop(state.AutoBrakeTranslated);
             _dynamicBrake.OnControlLoop(state.DynamicBrakeTranslated);
+            if (state.BailOff)
+            {
+                _independentBrake.EngageBailOffIfNeeded();
+            }
         }
 
         public void Close()
