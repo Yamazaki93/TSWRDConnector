@@ -63,6 +63,10 @@ The full list of supported trains and their respective packages:
  - Mann-Spessart Bahn BR185.2
  - Mann-Spessart Bahn DBpbzfa
  - CSX Heavy Haul AC4400CW
+ - CSX Heavy Haul SD40-2
+ - CSX Heavy Haul GP38-2
+ - NEC ACS-64
+ - NEC GP38-2
 
 ## Known Issues and Limitations
 
