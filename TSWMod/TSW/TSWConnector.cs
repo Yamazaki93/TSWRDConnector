@@ -80,7 +80,7 @@ namespace TSWMod.TSW
 
         private void RdOnButtonPressed(object sender, RailDriverButtonEvent e)
         {
-            if (e.KeyCode == 13)  // special key to change train
+            if (e.KeyCode == 13 && _inSession)  // special key to change train
             {
                 LockClearSetCurrentLocomotive();
                 _foundLocomotives.Clear();
@@ -246,6 +246,7 @@ namespace TSWMod.TSW
         {
             if (_currentMap.Contains(GenericMapNamePrefix) || string.IsNullOrEmpty(_currentMap) || !_currentMap.StartsWith("/"))
             {
+                _inSession = false;
                 _calibrationChecker.Stop();
                 _tswControlLoop.Stop();
                 _trainEnumerator.Stop();
@@ -256,6 +257,7 @@ namespace TSWMod.TSW
             }
             else
             {
+                _inSession = true;
                 MapChanged?.Invoke(this, new TSWMapChangedEvent(_currentMap.Split('/').Last()));
                 _trainEnumerator.Start();
                 _calibrationChecker.Start();
@@ -394,6 +396,7 @@ namespace TSWMod.TSW
         private Process _currentProcess;
         private readonly Mem _m;
         private bool _mOpened;
+        private bool _inSession;
         private readonly Timer _enumeratingTimer;
         private readonly Timer _gameSessionChecker;
         private readonly Timer _trainEnumerator;
