@@ -48,12 +48,24 @@ namespace TSWMod.TSW.NEC
 
             _masterControlF = new ACSMasterController(m, hWnd,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0CD0)));
-
             _independentBrakeF = new AC4400CWIndependentBrake(m, hWnd,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0D40)));
-
             _autoBrakeF = new ACS_64AutoBrake(m, hWnd,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0D30)));
+
+            _hornLeverB = new HornLever(m,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0D68)));
+            _hornButtonLowB = new HornButton(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0580)));
+            _hornButtonHighB = new HornButton(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0588)));
+
+            _masterControlB = new ACSMasterController(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0CC8)));
+            _independentBrakeB = new AC4400CWIndependentBrake(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0D38)));
+            _autoBrakeB = new ACS_64AutoBrake(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0D28)));
         }
 
         public bool CheckPlayerCalibration()
@@ -61,6 +73,13 @@ namespace TSWMod.TSW.NEC
             if (!_hornLeverF.CurrentValue.AlmostEquals(0) || _hornButtonLowF.CurrentValue || _hornButtonHighF.CurrentValue)  // ACS horn 0 is neutral
             {
                 _hornUse += 1;
+                _rearCab = false;
+            }
+
+            if (!_hornLeverB.CurrentValue.AlmostEquals(0) || _hornButtonLowB.CurrentValue || _hornButtonHighB.CurrentValue)
+            {
+                _hornUse += 1;
+                _rearCab = true;
             }
 
             if (_hornUse >= 3)
@@ -73,28 +92,38 @@ namespace TSWMod.TSW.NEC
 
         public void OnControlLoop(RailDriverLeverState state, int[] pressedButtons)
         {
+            var master = _masterControlF;
+            var trainBrake = _autoBrakeF;
+            var independentBrake = _independentBrakeF;
+            if (_rearCab)
+            {
+                master = _masterControlB;
+                trainBrake = _autoBrakeB;
+                independentBrake = _independentBrakeB;
+            }
+
             if (!state.BailOff)
             {
-                _independentBrakeF.DisengageBailOffIfNeeded();
+                independentBrake.DisengageBailOffIfNeeded();
             }
             if (_config[MasterControllerConfigKey].Value<string>().Equals(MasterControllerFollowRD))
             {
-                _masterControlF.OnControlLoop(_masterControlF.TranslateCombinedValue(state.ThrottleTranslated,
+                master.OnControlLoop(_masterControlF.TranslateCombinedValue(state.ThrottleTranslated,
                     state.DynamicBrakeTranslated));
             }
             else if (_config[MasterControllerConfigKey].Value<string>().Equals(MasterControllerFollowTSW))
             {
                 // in TSW, ACS-64 lever forward is throttle
-                _masterControlF.OnControlLoop(_masterControlF.TranslateCombinedValue(state.DynamicBrakeTranslated,
+                master.OnControlLoop(_masterControlF.TranslateCombinedValue(state.DynamicBrakeTranslated,
                     state.ThrottleTranslated));
             }
 
-            _independentBrakeF.OnControlLoop(state.IndependentBrake);
-            _autoBrakeF.OnControlLoop(state.AutoBrakeTranslated);
+            independentBrake.OnControlLoop(state.IndependentBrake);
+            trainBrake.OnControlLoop(state.AutoBrakeTranslated);
 
             if (state.BailOff)
             {
-                _independentBrakeF.EngageBailOffIfNeeded();
+                independentBrake.EngageBailOffIfNeeded();
             }
         }
 
@@ -119,6 +148,7 @@ namespace TSWMod.TSW.NEC
 
         public string Name => "ACS-64";
 
+        private bool _rearCab;
         private int _hornUse;
         private JObject _config;
         private readonly TSWLever _hornLeverF;
@@ -129,5 +159,11 @@ namespace TSWMod.TSW.NEC
         private readonly ACSMasterController _masterControlF;
         private readonly HornButton _hornButtonHighF;
         private readonly ACS_64AutoBrake _autoBrakeF;
+        private readonly HornLever _hornLeverB;
+        private readonly HornButton _hornButtonLowB;
+        private readonly HornButton _hornButtonHighB;
+        private readonly ACSMasterController _masterControlB;
+        private readonly AC4400CWIndependentBrake _independentBrakeB;
+        private readonly ACS_64AutoBrake _autoBrakeB;
     }
 }
