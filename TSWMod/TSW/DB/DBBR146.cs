@@ -39,6 +39,17 @@ namespace TSWMod.TSW.DB
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A50)));
             _directBrakeLeverF = new DBDirectBrakeLever(m, hWnd,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0990)));
+
+            _hornLeverBR = new HornLever(m,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0790)));
+            _throttleLeverB = new DBThrottleLever(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0890)));
+            _afbLeverB = new DBAFBLever(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0888)));
+            _trainBrakeLeverB = new DBTrainBrakeLever(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0880)));
+            _directBrakeLeverB = new DBDirectBrakeLever(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0768)));
         }
 
         public bool CheckPlayerCalibration()
@@ -46,6 +57,13 @@ namespace TSWMod.TSW.DB
             if (!_hornLeverFR.CurrentValue.AlmostEquals(0.5f))
             {
                 _hornUse += 1;
+                _rearCab = false;
+            }
+
+            if (!_hornLeverBR.CurrentValue.AlmostEquals(0.5f))
+            {
+                _hornUse += 1;
+                _rearCab = true;
             }
 
             if (_hornUse >= 3)
@@ -58,10 +76,20 @@ namespace TSWMod.TSW.DB
 
         public void OnControlLoop(RailDriverLeverState state, int[] pressedButtons)
         {
-            _afbLeverF.OnControlLoop(state.Reverser);
-            _throttleLeverF.OnControlLoop(state.Throttle);
-            _trainBrakeLeverF.OnControlLoop(state.AutoBrake);
-            _directBrakeLeverF.OnControlLoop(state.IndependentBrake);
+            if (!_rearCab)
+            {
+                _afbLeverF.OnControlLoop(state.Reverser);
+                _throttleLeverF.OnControlLoop(state.Throttle);
+                _trainBrakeLeverF.OnControlLoop(state.AutoBrake);
+                _directBrakeLeverF.OnControlLoop(state.IndependentBrake);
+            }
+            else
+            {
+                _afbLeverB.OnControlLoop(state.Reverser);
+                _throttleLeverB.OnControlLoop(state.Throttle);
+                _trainBrakeLeverB.OnControlLoop(state.AutoBrake);
+                _directBrakeLeverB.OnControlLoop(state.IndependentBrake);
+            }
         }
 
         public void Close()
@@ -85,6 +113,7 @@ namespace TSWMod.TSW.DB
         public string Name => "DB BR146-2";
 
         private int _hornUse;
+        private bool _rearCab;
         private readonly TSWLever _hornLeverFR;
         private readonly TSWLever _throttleLeverF;
         private readonly Mem _m;
@@ -92,5 +121,10 @@ namespace TSWMod.TSW.DB
         private readonly DBAFBLever _afbLeverF;
         private readonly DBTrainBrakeLever _trainBrakeLeverF;
         private readonly DBDirectBrakeLever _directBrakeLeverF;
+        private readonly HornLever _hornLeverBR;
+        private readonly DBThrottleLever _throttleLeverB;
+        private readonly DBAFBLever _afbLeverB;
+        private readonly DBTrainBrakeLever _trainBrakeLeverB;
+        private readonly DBDirectBrakeLever _directBrakeLeverB;
     }
 }
