@@ -39,7 +39,7 @@
 
         public float ReverserTranslated { get; }    // 0 = Reverse, 0.5 = Neutral, 1 = Forward
         public float ThrottleTranslated { get; }   // 0 - 1
-        public float DynamicBrakeTranslated { get; }   // 0 - 1
+        public float DynamicBrakeTranslated { get; }   // 0 = off, 0.02 = setup, 0.05 - 1 = brake range
         public float AutoBrakeTranslated { get; }  // 0 - 1 = Full auto brake range, 2 = emergency
 
         public bool BailOff { get; }

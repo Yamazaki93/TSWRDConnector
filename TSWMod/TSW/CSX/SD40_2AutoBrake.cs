@@ -36,7 +36,7 @@ namespace TSWMod.TSW.CSX
                 return 0.2f + 0.4f * raw; // 0.2 - 0.6 = brake range;
             }
 
-            if (raw < 1)
+            if (raw < 0.97f)
             {
                 return 0.65f;
             }

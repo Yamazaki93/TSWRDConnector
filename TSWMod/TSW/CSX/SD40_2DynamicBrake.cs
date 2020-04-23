@@ -15,17 +15,17 @@ namespace TSWMod.TSW.CSX
 
         protected override float TargetValuePreTransform(float raw)
         {
-            if (raw < 0.10)
+            if (raw < 0.01)
             {
                 return 0;
             }
 
-            if (raw < 0.26)
+            if (raw.AlmostEquals(0.02f))
             {
                 return 0.14f;  //initial setup
             }
 
-            return raw;
+            return raw * 0.8f + 0.2f;
         }
 
         protected override void OnDifferentValue(float diff)
