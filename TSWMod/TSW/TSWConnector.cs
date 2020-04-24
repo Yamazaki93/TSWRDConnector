@@ -31,6 +31,19 @@ namespace TSWMod.TSW
 
         private const string GenericMapNamePrefix = "GenericDiorama"; // Main menu world name
 
+        private readonly static IDictionary<int, InputHelpers.VirtualKeyStates[]> GameControlKeys =  new Dictionary<int, InputHelpers.VirtualKeyStates[]>
+        {
+            {0, new []{InputHelpers.VirtualKeyStates.VK_E }},
+            {1, new []{InputHelpers.VirtualKeyStates.VK_ESCAPE }},
+            {14,new []{ InputHelpers.VirtualKeyStates.VK_1 }},
+            {15,new []{ InputHelpers.VirtualKeyStates.VK_2 }},
+            {16,new []{ InputHelpers.VirtualKeyStates.VK_3 }},
+            {17,new []{ InputHelpers.VirtualKeyStates.VK_8 }},
+            {18,new []{ InputHelpers.VirtualKeyStates.VK_F1 }},
+            {19,new []{ InputHelpers.VirtualKeyStates.VK_9 }},
+
+        };
+
         public TSWConnector(RailDriverConnector rd)
         {
             _rd = rd;
@@ -74,7 +87,11 @@ namespace TSWMod.TSW
             var mapping = _currentLocomotive?.GetButtonMappings();
             if (mapping != null && mapping.ContainsKey(e.KeyCode))
             {
-                InputHelpers.KeyUp(_currentProcess.MainWindowHandle, mapping[e.KeyCode]);
+                ReleaseKeyCombo(mapping[e.KeyCode]);
+            }
+            else if (GameControlKeys.ContainsKey(e.KeyCode))
+            {
+                ReleaseKeyCombo(GameControlKeys[e.KeyCode]);
             }
         }
 
@@ -93,8 +110,31 @@ namespace TSWMod.TSW
                 var mapping = _currentLocomotive?.GetButtonMappings();
                 if (mapping != null && mapping.ContainsKey(e.KeyCode))
                 {
-                    InputHelpers.KeyDown(_currentProcess.MainWindowHandle, mapping[e.KeyCode]);
+                    PressKeyCombo(mapping[e.KeyCode]);
                 }
+                else if (GameControlKeys.ContainsKey(e.KeyCode))
+                {
+                    PressKeyCombo(GameControlKeys[e.KeyCode]);
+                }
+            }
+        }
+
+        private void PressKeyCombo(InputHelpers.VirtualKeyStates[] keys)
+        {
+            foreach (var k in keys)
+            {
+                InputHelpers.KeyDown(_currentProcess.MainWindowHandle, k);
+                Thread.Sleep(10);
+            }
+        }
+
+
+        private void ReleaseKeyCombo(InputHelpers.VirtualKeyStates[] keys)
+        {
+            foreach (var k in keys.Reverse())
+            {
+                InputHelpers.KeyUp(_currentProcess.MainWindowHandle, k);
+                Thread.Sleep(10);
             }
         }
 

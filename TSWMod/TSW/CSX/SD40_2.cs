@@ -12,16 +12,16 @@ namespace TSWMod.TSW.CSX
     class SD40_2 : ILocomotive
     {
         public const string NamePartial = "SD40-2";
-        private readonly IDictionary<int, InputHelpers.VirtualKeyStates> DefaultKeyMappings = new Dictionary<int, InputHelpers.VirtualKeyStates>
+        private readonly IDictionary<int, InputHelpers.VirtualKeyStates[]> DefaultKeyMappings = new Dictionary<int, InputHelpers.VirtualKeyStates[]>
         {
-            { 36, InputHelpers.VirtualKeyStates.VK_BACK },  // Emergency brake
-            { 37, InputHelpers.VirtualKeyStates.VK_BACK },
-            { 38, InputHelpers.VirtualKeyStates.VK_Q },
-            { 39, InputHelpers.VirtualKeyStates.VK_X },
-            { 40, InputHelpers.VirtualKeyStates.VK_P },
-            { 41, InputHelpers.VirtualKeyStates.VK_B },
-            { 42, InputHelpers.VirtualKeyStates.VK_SPACE },   // Horn
-            { 43, InputHelpers.VirtualKeyStates.VK_SPACE },
+            { 36, new []{InputHelpers.VirtualKeyStates.VK_BACK }},  // Emergency brake
+            { 37, new []{InputHelpers.VirtualKeyStates.VK_BACK }},
+            { 38, new []{InputHelpers.VirtualKeyStates.VK_Q }},
+            { 39, new []{InputHelpers.VirtualKeyStates.VK_X }},
+            { 40, new []{InputHelpers.VirtualKeyStates.VK_P }},
+            { 41, new []{InputHelpers.VirtualKeyStates.VK_B }},
+            { 42, new []{InputHelpers.VirtualKeyStates.VK_SPACE }},   // Horn
+            { 43, new []{InputHelpers.VirtualKeyStates.VK_SPACE }},
         };
 
         public SD40_2(Mem m, UIntPtr basePtr, IntPtr hWnd)
@@ -82,7 +82,7 @@ namespace TSWMod.TSW.CSX
         {
         }
 
-        public IDictionary<int, InputHelpers.VirtualKeyStates> GetButtonMappings()
+        public IDictionary<int, InputHelpers.VirtualKeyStates[]> GetButtonMappings()
         {
             return DefaultKeyMappings;
         }

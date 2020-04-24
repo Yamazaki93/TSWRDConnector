@@ -9,21 +9,24 @@ namespace TSWMod.TSW.DB
     class DB185_2 : ILocomotive
     {
         public const string NamePartial = "DB_BR185-2";
-        private readonly IDictionary<int, InputHelpers.VirtualKeyStates> DefaultKeyMappings = new Dictionary<int, InputHelpers.VirtualKeyStates>
-        {
-            { 2, InputHelpers.VirtualKeyStates.VK_NEXT },  // PZB Ack
-            { 3, InputHelpers.VirtualKeyStates.VK_END },  // PZB Release
-            { 4, InputHelpers.VirtualKeyStates.VK_DELETE },  // PZB Override
-            { 34, InputHelpers.VirtualKeyStates.VK_W },  // Reverser
-            { 35, InputHelpers.VirtualKeyStates.VK_S },  
-            { 36, InputHelpers.VirtualKeyStates.VK_BACK },  // Emergency brake
-            { 37, InputHelpers.VirtualKeyStates.VK_BACK },
-            { 38, InputHelpers.VirtualKeyStates.VK_Q },
-            { 39, InputHelpers.VirtualKeyStates.VK_X },
-            { 40, InputHelpers.VirtualKeyStates.VK_P },
-            { 42, InputHelpers.VirtualKeyStates.VK_SPACE },   // Horn
-            { 43, InputHelpers.VirtualKeyStates.VK_N },
-        }; 
+        private readonly IDictionary<int, InputHelpers.VirtualKeyStates[]> DefaultKeyMappings =
+            new Dictionary<int, InputHelpers.VirtualKeyStates[]>
+            {
+                {2, new[] {InputHelpers.VirtualKeyStates.VK_NEXT}}, // PZB Ack
+                {3, new[] {InputHelpers.VirtualKeyStates.VK_END}}, // PZB Release
+                {4, new[] {InputHelpers.VirtualKeyStates.VK_DELETE}}, // PZB Override
+                {5, new[] {InputHelpers.VirtualKeyStates.VK_LCONTROL, InputHelpers.VirtualKeyStates.VK_R}},   //AFB switch
+                {34, new[] {InputHelpers.VirtualKeyStates.VK_W}}, // Reverser
+                {35, new[] {InputHelpers.VirtualKeyStates.VK_S}},
+                {36, new[] {InputHelpers.VirtualKeyStates.VK_BACK}}, // Emergency brake
+                {37, new[] {InputHelpers.VirtualKeyStates.VK_BACK}},
+                {38, new[] {InputHelpers.VirtualKeyStates.VK_Q}},
+                {39, new[] {InputHelpers.VirtualKeyStates.VK_X}},
+                {40, new[] {InputHelpers.VirtualKeyStates.VK_P}},
+                {42, new[] {InputHelpers.VirtualKeyStates.VK_SPACE}}, // Horn
+                {43, new[] {InputHelpers.VirtualKeyStates.VK_N}},
+            };
+
 
         public DB185_2(Mem m, UIntPtr basePtr, IntPtr hWnd)
         {
@@ -100,7 +103,7 @@ namespace TSWMod.TSW.DB
         {
         }
 
-        public IDictionary<int, InputHelpers.VirtualKeyStates> GetButtonMappings()
+        public IDictionary<int, InputHelpers.VirtualKeyStates[]> GetButtonMappings()
         {
             return DefaultKeyMappings;
         }
