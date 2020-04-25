@@ -254,9 +254,7 @@ namespace TSWMod.RailDriver
                 ParseIntFromCalibrationLine(text[30], out var idleMax);
                 ParseIntFromCalibrationLine(text[39], out var dynSetupMin);
                 ParseIntFromCalibrationLine(text[40], out var dynSetupMax);
-                ParseIntFromCalibrationLine(text[11], out var throttleNeutralMin);
-                ParseIntFromCalibrationLine(text[12], out var throttleNeutralMax);
-                _throttle = new RDThrottleDynamicBrake(throttleMin, throttleMax, idleMin, idleMax, dynSetupMin, dynSetupMax, throttleNeutralMin, throttleNeutralMax);
+                _throttle = new RDThrottleDynamicBrake(throttleMin, throttleMax, idleMin, idleMax, dynSetupMin, dynSetupMax);
 
 
                 ParseIntFromCalibrationLine(text[57], out var autoBrakeMin);

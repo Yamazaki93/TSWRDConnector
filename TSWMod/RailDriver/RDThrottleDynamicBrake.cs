@@ -8,14 +8,12 @@ namespace TSWMod.RailDriver
 {
     class RDThrottleDynamicBrake : RDLever
     {
-        public RDThrottleDynamicBrake(int min, int max, int idleMin, int idleMax, int dynSetupMin, int dynSetupMax, int neutralMin, int neutralMax) : base(min, max)
+        public RDThrottleDynamicBrake(int min, int max, int idleMin, int idleMax, int dynSetupMin, int dynSetupMax) : base(min, max)
         {
             _idleMin = idleMin;
             _idleMax = idleMax;
             _dynSetupMin = dynSetupMin;
             _dynSetupMax = dynSetupMax;
-            _neutralMin = neutralMin;
-            _neutralMax = neutralMax;
         }
 
         public float TranslatedThrottleValue
@@ -27,13 +25,7 @@ namespace TSWMod.RailDriver
                     return 0;
                 }
 
-                if (CurrentValue <= _idleMax)
-                {
-                    return 0.02f;
-                }
-
-                var throttleRange = ((float)CurrentValue - _idleMax) / ((float)Max - _idleMax);
-                return Math.Max(throttleRange, 0.03f);
+                return ((float) CurrentValue - _idleMin) / ((float) Max - _idleMin);
             }
         }
 
@@ -41,7 +33,7 @@ namespace TSWMod.RailDriver
         {
             get
             {
-                var idleDynSetupLimit = (_dynSetupMin + _idleMax) / 2f;
+                var idleDynSetupLimit = (_dynSetupMin + _idleMin) / 2f;
                 if (CurrentValue > idleDynSetupLimit)
                 {
                     return 0;
@@ -52,7 +44,7 @@ namespace TSWMod.RailDriver
                 {
                     return 0.02f;
                 }
-                return Math.Max(dynamicRangeValue, 0.02f);
+                return Math.Max(dynamicRangeValue, 0.03f);
             }
         }
 
@@ -60,7 +52,5 @@ namespace TSWMod.RailDriver
         private readonly int _idleMax;
         private readonly int _dynSetupMin;
         private readonly int _dynSetupMax;
-        private readonly int _neutralMin;
-        private readonly int _neutralMax;
     }
 }
