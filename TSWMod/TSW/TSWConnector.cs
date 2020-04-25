@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using TSWMod.RailDriver;
 using TSWMod.TSW.CSX;
 using TSWMod.TSW.DB;
+using TSWMod.TSW.LIRR;
 using TSWMod.TSW.NEC;
 using Timer = System.Timers.Timer;
 
@@ -31,7 +32,7 @@ namespace TSWMod.TSW
 
         private const string GenericMapNamePrefix = "GenericDiorama"; // Main menu world name
 
-        private readonly static IDictionary<int, InputHelpers.VirtualKeyStates[]> GameControlKeys =  new Dictionary<int, InputHelpers.VirtualKeyStates[]>
+        private static readonly IDictionary<int, InputHelpers.VirtualKeyStates[]> GameControlKeys =  new Dictionary<int, InputHelpers.VirtualKeyStates[]>
         {
             {0, new []{InputHelpers.VirtualKeyStates.VK_E }},
             {1, new []{InputHelpers.VirtualKeyStates.VK_ESCAPE }},
@@ -251,6 +252,10 @@ namespace TSWMod.TSW
                 else if (possibleName.Contains(ACS_64.NamePartial))
                 {
                     _foundLocomotives.Add(ptr, new ACS_64(_m, ptr, _currentProcess.MainWindowHandle));
+                }
+                else if (possibleName.Contains(M7.NamePartial))
+                {
+                    _foundLocomotives.Add(ptr, new M7(_m, ptr, _currentProcess.MainWindowHandle));
                 }
             }
         }

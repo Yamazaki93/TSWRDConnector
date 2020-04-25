@@ -133,6 +133,8 @@
     <Compile Include="TSW\DB\DBTrainBrakeLever.cs" />
     <Compile Include="TSW\HornLever.cs" />
     <Compile Include="TSW\ILocomotive.cs" />
+    <Compile Include="TSW\LIRR\M7.cs" />
+    <Compile Include="TSW\LIRR\M7MasterController.cs" />
     <Compile Include="TSW\MemExtensions.cs" />
     <Compile Include="TSW\NEC\ACSMasterController.cs" />
     <Compile Include="TSW\NEC\ACS_64.cs" />
