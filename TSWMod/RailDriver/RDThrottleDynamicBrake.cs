@@ -41,17 +41,18 @@ namespace TSWMod.RailDriver
         {
             get
             {
-                if (CurrentValue > _dynSetupMax)
+                var idleDynSetupLimit = (_dynSetupMin + _idleMax) / 2f;
+                if (CurrentValue > idleDynSetupLimit)
                 {
                     return 0;
                 }
 
-                if (CurrentValue >= _dynSetupMin)
+                var dynamicRangeValue = 1 - ((float) CurrentValue - Min) / ((float) _dynSetupMax - Min);
+                if (dynamicRangeValue < 0.02)
                 {
                     return 0.02f;
                 }
-                var dynamicRangeValue = 1 - ((float) CurrentValue - Min) / ((float) _dynSetupMax - Min);
-                return Math.Max(dynamicRangeValue, 0.03f);
+                return Math.Max(dynamicRangeValue, 0.02f);
             }
         }
 
