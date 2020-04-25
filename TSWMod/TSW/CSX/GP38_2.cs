@@ -15,6 +15,7 @@ namespace TSWMod.TSW.CSX
     class GP38_2 : ILocomotive
     {
         public const string NamePartial = "GP38-2";
+        public const string YN3NamePartial = "YN3_GP38-2";
         private readonly IDictionary<int, InputHelpers.VirtualKeyStates[]> DefaultKeyMappings = new Dictionary<int, InputHelpers.VirtualKeyStates[]>
         {
             { 36, new []{InputHelpers.VirtualKeyStates.VK_BACK }},  // Emergency brake
@@ -27,22 +28,23 @@ namespace TSWMod.TSW.CSX
             { 43, new []{InputHelpers.VirtualKeyStates.VK_SPACE }},
         };
 
-        public GP38_2(Mem m, UIntPtr basePtr, IntPtr hWnd)
+        public GP38_2(Mem m, UIntPtr basePtr, IntPtr hWnd, bool yn3)
         {
             _m = m;
             _basePtr = basePtr;
+            var yn3Offset = yn3 ? 0x08 : 0x00;
             _hornButton = new HornButton(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0938)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0938 + yn3Offset)));
             _throttle = new EightNotchThrottle(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0928)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0928 + yn3Offset)));
             _reverser = new PlusMinusReverser(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0930)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0930 + yn3Offset)));
             _independentBrake = new SD40_2IndependentBrake(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x06C8)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x06C8 + yn3Offset)));
             _autoBrake = new SD40_2AutoBrake(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0800)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0800 + yn3Offset)));
             _dynamicBrake = new SD40_2DynamicBrake(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0750)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0750 + yn3Offset)));
         }
 
         public bool CheckPlayerCalibration()

@@ -247,7 +247,8 @@ namespace TSWMod.TSW
                 }
                 else if (possibleName.Contains(GP38_2.NamePartial))
                 {
-                    _foundLocomotives.Add(ptr, new GP38_2(_m, ptr, _currentProcess.MainWindowHandle));
+                    // 2 variants of GP38-2 are present
+                    _foundLocomotives.Add(ptr, new GP38_2(_m, ptr, _currentProcess.MainWindowHandle, possibleName.Contains(GP38_2.YN3NamePartial)));
                 }
                 else if (possibleName.Contains(ACS_64.NamePartial))
                 {
