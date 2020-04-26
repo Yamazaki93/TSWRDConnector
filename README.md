@@ -29,9 +29,9 @@ Hopefully, this makes your TSW experience better, more realistic and exciting.
 
 ## Getting Started
 
-Here's a video showing how it works.
-
 [![Alt text](https://img.youtube.com/vi/ZyiEsUbQjms/0.jpg)](https://youtu.be/ZyiEsUbQjms)
+[![Alt text](https://img.youtube.com/vi/fi4M1tYHTns/0.jpg)](https://youtu.be/fi4M1tYHTns)
+
 
 You do NOT need MacroWorks running for this to work. In fact, it may not work if MacroWorks is running so exit it first.
 
