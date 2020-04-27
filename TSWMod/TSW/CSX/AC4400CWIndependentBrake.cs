@@ -18,45 +18,12 @@ namespace TSWMod.TSW.CSX
             return 0.8f * raw + 0.2f;
         }
 
-        protected override void OnDifferentValue(float diff)
-        {
-            if (_bailOff)
-            {
-                return;
-            }
-
-            if (diff < 0)
-            {
-                if (_currentKeyDown == ']')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_6);
-                }
-                _currentKeyDown = '[';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
-            }
-            else
-            {
-                if (_currentKeyDown == '[')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
-                }
-                _currentKeyDown = ']';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_6);
-            }
-        }
-
-        protected override void OnSameValue()
-        {
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_6);
-        }
-
         public void EngageBailOffIfNeeded()
         {
             if (!_bailOff && CurrentValue.AlmostEquals(0.2f))
             {
                 _bailOff = true;
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
+                InputHelpers.KeyDown(HWND, InputHelpers.VKCodes.VK_OEM_4);
             }
         }
 
@@ -64,12 +31,16 @@ namespace TSWMod.TSW.CSX
         {
             if (_bailOff)
             {
-                InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
+                InputHelpers.KeyUp(HWND, InputHelpers.VKCodes.VK_OEM_4);
                 _bailOff = false;
             }
         }
 
-        private char _currentKeyDown = ' ';
+        protected override InputHelpers.VKCodes[] IncreaseKeys =>
+            KeyboardLayoutManager.Current.IndependentBrakeIncrease;
+        protected override InputHelpers.VKCodes[] DecreaseKeys =>
+            KeyboardLayoutManager.Current.IndependentBrakeDecrease;
+
         private bool _bailOff;
     }
 }

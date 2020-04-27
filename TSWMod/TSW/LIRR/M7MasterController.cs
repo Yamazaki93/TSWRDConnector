@@ -13,34 +13,6 @@ namespace TSWMod.TSW.LIRR
         {
         }
 
-        protected override void OnDifferentValue(float diff)
-        {
-            if (diff < 0)
-            {
-                if (_currentKeyDown == 'a')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_A);
-                }
-                _currentKeyDown = 'd';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_D);
-            }
-            else
-            {
-                if (_currentKeyDown == 'd')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_D);
-                }
-                _currentKeyDown = 'a';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_A);
-            }
-        }
-
-        protected override void OnSameValue()
-        {
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_D);
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_A);
-        }
-
         public float TranslateCombinedValue(float throttle, float dynamicBrake, float autoBrake)
         {
             if (autoBrake.AlmostEquals(2))
@@ -69,7 +41,7 @@ namespace TSWMod.TSW.LIRR
 
             return 0.6f;  // neutral = 0.6
         }
-
-        private char _currentKeyDown = ' ';
+        protected override InputHelpers.VKCodes[] IncreaseKeys => KeyboardLayoutManager.Current.ThrottleIncrease;
+        protected override InputHelpers.VKCodes[] DecreaseKeys => KeyboardLayoutManager.Current.ThrottleDecrease;
     }
 }

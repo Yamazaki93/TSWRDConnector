@@ -132,7 +132,9 @@
     <Compile Include="TSW\DB\DBThrottleLever.cs" />
     <Compile Include="TSW\DB\DBTrainBrakeLever.cs" />
     <Compile Include="TSW\HornLever.cs" />
+    <Compile Include="TSW\IKeyboardLayout.cs" />
     <Compile Include="TSW\ILocomotive.cs" />
+    <Compile Include="TSW\KeyboardLayoutManager.cs" />
     <Compile Include="TSW\LIRR\M7.cs" />
     <Compile Include="TSW\LIRR\M7MasterController.cs" />
     <Compile Include="TSW\MemExtensions.cs" />
@@ -146,6 +148,7 @@
     <Compile Include="TSW\TSWConnector.cs" />
     <Compile Include="TSW\TSWLever.cs" />
     <Compile Include="TSW\TSWMapChangedEvent.cs" />
+    <Compile Include="TSW\USDefaultKeyboardLayout.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

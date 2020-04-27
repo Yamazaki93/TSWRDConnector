@@ -13,19 +13,20 @@ namespace TSWMod.TSW.LIRR
     class M7 : ILocomotive
     {
         public const string NamePartial = "LIRR_M7";
-        private readonly IDictionary<int, InputHelpers.VirtualKeyStates[]> DefaultKeyMappings = new Dictionary<int, InputHelpers.VirtualKeyStates[]>
-        {
-            { 34, new []{InputHelpers.VirtualKeyStates.VK_W }},  // Reverser
-            { 35, new []{InputHelpers.VirtualKeyStates.VK_S }},
-            { 36, new []{InputHelpers.VirtualKeyStates.VK_BACK }},  // Emergency brake
-            { 37, new []{InputHelpers.VirtualKeyStates.VK_BACK }},
-            { 38, new []{InputHelpers.VirtualKeyStates.VK_Q }},
-            { 39, new []{InputHelpers.VirtualKeyStates.VK_X }},
-            { 40, new []{InputHelpers.VirtualKeyStates.VK_P }},
-            { 41, new []{InputHelpers.VirtualKeyStates.VK_B }},
-            { 42, new []{InputHelpers.VirtualKeyStates.VK_SPACE }},   // Horn
-            { 43, new []{InputHelpers.VirtualKeyStates.VK_SPACE }},
-        };
+        private IDictionary<int, InputHelpers.VKCodes[]> DefaultKeyMappings =>
+            new Dictionary<int, InputHelpers.VKCodes[]>
+            {
+                {34, KeyboardLayoutManager.Current.ReverserIncrease}, // Reverser
+                {35, KeyboardLayoutManager.Current.ReverserDecrease},
+                {36, KeyboardLayoutManager.Current.EmergencyBrake}, // Emergency brake
+                {37, KeyboardLayoutManager.Current.EmergencyBrake},
+                {38, KeyboardLayoutManager.Current.AlerterReset},
+                {39, KeyboardLayoutManager.Current.Sand},
+                {40, KeyboardLayoutManager.Current.PantographRaise},
+                {41,  KeyboardLayoutManager.Current.Bell},
+                {42, KeyboardLayoutManager.Current.Horn1}, // Horn
+                {43, KeyboardLayoutManager.Current.Horn1},
+            };
 
         public M7(Mem m, UIntPtr basePtr, IntPtr hWnd)
         {
@@ -65,7 +66,7 @@ namespace TSWMod.TSW.LIRR
         {
         }
 
-        public IDictionary<int, InputHelpers.VirtualKeyStates[]> GetButtonMappings()
+        public IDictionary<int, InputHelpers.VKCodes[]> GetButtonMappings()
         {
             return DefaultKeyMappings;
         }

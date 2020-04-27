@@ -9,12 +9,7 @@ namespace TSWMod.TSW
         {
         }
 
-        protected override void OnDifferentValue(float diff)
-        {
-        }
-
-        protected override void OnSameValue()
-        {
-        }
+        protected override InputHelpers.VKCodes[] IncreaseKeys => new InputHelpers.VKCodes[] { };
+        protected override InputHelpers.VKCodes[] DecreaseKeys => new InputHelpers.VKCodes[] { };
     }
 }

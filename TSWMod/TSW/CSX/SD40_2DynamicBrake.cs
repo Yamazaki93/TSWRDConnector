@@ -27,36 +27,7 @@ namespace TSWMod.TSW.CSX
 
             return raw * 0.8f + 0.2f;
         }
-
-        protected override void OnDifferentValue(float diff)
-        {
-            if (diff < 0)
-            {
-                if (_currentKeyDown == '.')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_PERIOD);
-                }
-                _currentKeyDown = ',';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_COMMA);
-            }
-            else
-            {
-                if (_currentKeyDown == ',')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_COMMA);
-                }
-                _currentKeyDown = '.';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_PERIOD);
-            }
-        }
-
-        protected override void OnSameValue()
-        {
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_PERIOD);
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_COMMA);
-        }
-
-
-        private char _currentKeyDown = ' ';
+        protected override InputHelpers.VKCodes[] IncreaseKeys => KeyboardLayoutManager.Current.DynamicBrakeIncrease;
+        protected override InputHelpers.VKCodes[] DecreaseKeys => KeyboardLayoutManager.Current.DynamicBrakeDecrease;
     }
 }

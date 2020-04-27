@@ -9,17 +9,18 @@ namespace TSWMod.TSW.CSX
     class AC4400CW : ILocomotive
     {
         public const string NamePartial = "AC4400CW";
-        private readonly IDictionary<int, InputHelpers.VirtualKeyStates[]> DefaultKeyMappings = new Dictionary<int, InputHelpers.VirtualKeyStates[]>
-        {
-            { 36, new []{InputHelpers.VirtualKeyStates.VK_BACK }},  // Emergency brake
-            { 37, new []{InputHelpers.VirtualKeyStates.VK_BACK }},
-            { 38, new []{InputHelpers.VirtualKeyStates.VK_Q }},
-            { 39, new []{InputHelpers.VirtualKeyStates.VK_X }},
-            { 40, new []{InputHelpers.VirtualKeyStates.VK_P }},
-            { 41, new []{InputHelpers.VirtualKeyStates.VK_B }},
-            { 42, new []{InputHelpers.VirtualKeyStates.VK_SPACE }},   // Horn
-            { 43, new []{InputHelpers.VirtualKeyStates.VK_SPACE }},
-        }; 
+        private IDictionary<int, InputHelpers.VKCodes[]> DefaultKeyMappings =>
+            new Dictionary<int, InputHelpers.VKCodes[]>
+            {
+                {36, KeyboardLayoutManager.Current.EmergencyBrake}, // Emergency brake
+                {37, KeyboardLayoutManager.Current.EmergencyBrake},
+                {38, KeyboardLayoutManager.Current.AlerterReset},
+                {39, KeyboardLayoutManager.Current.Sand},
+                {40, KeyboardLayoutManager.Current.PantographRaise},
+                {41,  KeyboardLayoutManager.Current.Bell},
+                {42, KeyboardLayoutManager.Current.Horn1}, // Horn
+                {43, KeyboardLayoutManager.Current.Horn1},
+            };
 
         public AC4400CW(Mem m, UIntPtr basePtr, IntPtr hWnd)
         {
@@ -76,7 +77,7 @@ namespace TSWMod.TSW.CSX
         {
         }
 
-        public IDictionary<int, InputHelpers.VirtualKeyStates[]> GetButtonMappings()
+        public IDictionary<int, InputHelpers.VKCodes[]> GetButtonMappings()
         {
             return DefaultKeyMappings;
         }

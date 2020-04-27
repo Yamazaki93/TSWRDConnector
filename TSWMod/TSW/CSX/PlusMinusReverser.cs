@@ -33,35 +33,7 @@ namespace TSWMod.TSW.CSX
             return raw;
         }
 
-        protected override void OnDifferentValue(float diff)
-        {
-            if (diff < 0)
-            {
-                if (_currentKeyDown == 'w')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_W);
-                }
-                _currentKeyDown = 's';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_S);
-            }
-            else
-            {
-                if (_currentKeyDown == 's')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_S);
-                }
-                _currentKeyDown = 'w';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_W);
-            }
-        }
-
-        protected override void OnSameValue()
-        {
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_W);
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_S);
-        }
-
-        private char _currentKeyDown = ' ';
-
+        protected override InputHelpers.VKCodes[] IncreaseKeys => KeyboardLayoutManager.Current.ReverserIncrease;
+        protected override InputHelpers.VKCodes[] DecreaseKeys => KeyboardLayoutManager.Current.ReverserDecrease;
     }
 }

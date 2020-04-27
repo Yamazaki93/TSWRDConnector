@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace TSWMod
 {
@@ -18,7 +20,7 @@ namespace TSWMod
         /// <summary>
         /// Virtual Keys
         /// </summary>
-        public enum VirtualKeyStates : int
+        public enum VKCodes : int
         {
             VK_LBUTTON = 0x01,
             VK_RBUTTON = 0x02,
@@ -253,12 +255,36 @@ namespace TSWMod
             return processes.Length > 0 ? processes[0].MainWindowHandle : IntPtr.Zero;
         }
 
+        public static void KeyComboDown(IntPtr hWnd, VKCodes[] keys)
+        {
+            for (var i = 0; i < keys.Length; i++)
+            {
+                KeyDown(hWnd, keys[i]);
+                if (i == keys.Length - 1)
+                    break;
+                Thread.Sleep(10);
+            }
+        }
+
+        public static void KeyComboUp(IntPtr hWnd, VKCodes[] keys)
+        {
+            keys = keys.Reverse().ToArray();
+            for (var i = 0; i < keys.Length; i++)
+            {
+                KeyUp(hWnd, keys[i]);
+                if (i == keys.Length - 1)
+                    break;
+                Thread.Sleep(10);
+            }
+        }
+
+
         /// <summary>
         /// Sends a Keydown message(0x100) to the specified window with a Virtual Key
         /// </summary>
         /// <param name="winTitle">Window Title</param>
         /// <param name="Key">Virtual Key to Send</param>
-        public static void KeyDown(IntPtr hWnd, VirtualKeyStates Key)
+        public static void KeyDown(IntPtr hWnd, VKCodes Key)
         {
             SendMessage(hWnd, 0x100, (int)Key, 0);
         }
@@ -268,7 +294,7 @@ namespace TSWMod
         /// </summary>
         /// <param name="winTitle">Window Title</param>
         /// <param name="Key">Virtual Key to Send</param>
-        public static void KeyUp(IntPtr hWnd, VirtualKeyStates Key)
+        public static void KeyUp(IntPtr hWnd, VKCodes Key)
         {
             SendMessage(hWnd, 0x101, (int)Key, 0);
         }

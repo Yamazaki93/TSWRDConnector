@@ -12,7 +12,7 @@ namespace TSWMod.TSW
         void OnControlLoop(RailDriverLeverState state, int[] pressedButtons);
         void Close();
         void SetConfiguration(JObject config);
-        IDictionary<int, InputHelpers.VirtualKeyStates[]> GetButtonMappings();
+        IDictionary<int, InputHelpers.VKCodes[]> GetButtonMappings();
         JObject GetConfiguration();
         string Name { get; }
     }
