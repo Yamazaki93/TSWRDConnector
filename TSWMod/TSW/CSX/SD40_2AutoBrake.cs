@@ -9,7 +9,7 @@ namespace TSWMod.TSW.CSX
 {
     class SD40_2AutoBrake : TSWLever
     {
-        public SD40_2AutoBrake(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, false)
+        public SD40_2AutoBrake(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr)
         {
         }
 

@@ -9,7 +9,7 @@ namespace TSWMod.TSW.NEC
 {
     class ACS_64AutoBrake : TSWLever
     {
-        public ACS_64AutoBrake(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, false)
+        public ACS_64AutoBrake(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr)
         {
         }
 

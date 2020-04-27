@@ -9,7 +9,7 @@ namespace TSWMod.TSW.CSX
 {
     class SD40_2IndependentBrake : TSWLever
     {
-        public SD40_2IndependentBrake(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, false)
+        public SD40_2IndependentBrake(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr)
         {
         }
 

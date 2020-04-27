@@ -12,7 +12,7 @@ namespace TSWMod.TSW.NEC
     // -1 = full dynamic brake
     class ACSMasterController : TSWLever
     {
-        public ACSMasterController(Mem m, IntPtr hWnd, UIntPtr basePtr, bool hasNotch = false) : base(m, hWnd, basePtr, hasNotch)
+        public ACSMasterController(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr)
         {
         }
 

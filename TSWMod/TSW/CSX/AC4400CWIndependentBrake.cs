@@ -9,7 +9,7 @@ namespace TSWMod.TSW.CSX
 {
     class AC4400CWIndependentBrake : TSWLever
     {
-        public AC4400CWIndependentBrake(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, false)
+        public AC4400CWIndependentBrake(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr)
         {
         }
 

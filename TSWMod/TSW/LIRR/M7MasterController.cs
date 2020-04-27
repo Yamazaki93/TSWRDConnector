@@ -9,7 +9,7 @@ namespace TSWMod.TSW.LIRR
 {
     class M7MasterController : TSWLever
     {
-        public M7MasterController(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, false)
+        public M7MasterController(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr)
         {
         }
 
