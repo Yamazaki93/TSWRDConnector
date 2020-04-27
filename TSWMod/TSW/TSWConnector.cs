@@ -65,8 +65,13 @@ namespace TSWMod.TSW
             _foundLocomotives = new Dictionary<UIntPtr, ILocomotive>();
             rd.ButtonPressed += RdOnButtonPressed;
             rd.ButtonReleased += RdOnButtonReleased;
-
             KeyboardLayoutManager.Current = new USDefaultKeyboardLayout();
+
+            var keyboard = System.Windows.Forms.InputLanguage.CurrentInputLanguage.Culture.Name;
+            if (keyboard == "fr-FR")
+            {
+                KeyboardLayoutManager.Current = new FrenchDefaultKeyboardLayout();
+            }
         }
 
         public JObject GetCurrentLocomotiveConfig()

@@ -29,7 +29,7 @@ namespace TSWMod.TSW
         public virtual InputHelpers.VKCodes[] PantographRaise => new[] { InputHelpers.VKCodes.VK_P };
         public virtual InputHelpers.VKCodes[] ReverserDecrease => new[] { InputHelpers.VKCodes.VK_S };
         public virtual InputHelpers.VKCodes[] ReverserIncrease => new[] { InputHelpers.VKCodes.VK_W };
-        public InputHelpers.VKCodes[] Sand => new[] { InputHelpers.VKCodes.VK_X };
+        public virtual InputHelpers.VKCodes[] Sand => new[] { InputHelpers.VKCodes.VK_X };
         public virtual InputHelpers.VKCodes[] ThrottleDecrease => new[] { InputHelpers.VKCodes.VK_D };
         public virtual InputHelpers.VKCodes[] ThrottleIncrease => new[] { InputHelpers.VKCodes.VK_A };
     }
