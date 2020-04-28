@@ -25,7 +25,7 @@ namespace TSWMod.TSW.CSX
                 return 0.14f;  //initial setup
             }
 
-            return raw * 0.8f + 0.2f;
+            return raw * 0.78f + 0.22f;
         }
         protected override InputHelpers.VKCodes[] IncreaseKeys => KeyboardLayoutManager.Current.DynamicBrakeIncrease;
         protected override InputHelpers.VKCodes[] DecreaseKeys => KeyboardLayoutManager.Current.DynamicBrakeDecrease;
