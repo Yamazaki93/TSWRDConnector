@@ -122,7 +122,7 @@ namespace TSWMod.TSW
                 }
                 else if (GameControlKeys.ContainsKey(e.KeyCode))
                 {
-                    InputHelpers.KeyComboUp(_currentProcess.MainWindowHandle, GameControlKeys[e.KeyCode]);
+                    InputHelpers.KeyComboDown(_currentProcess.MainWindowHandle, GameControlKeys[e.KeyCode]);
                 }
             }
         }
