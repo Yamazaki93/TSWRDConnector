@@ -116,6 +116,8 @@
     <Compile Include="TSW\Caltrains\F40PHAutomaticBrake.cs" />
     <Compile Include="TSW\Caltrains\F40PHIndependentBrake.cs" />
     <Compile Include="TSW\Caltrains\F40PHDynamicBrake.cs" />
+    <Compile Include="TSW\Caltrains\NipponCab.cs" />
+    <Compile Include="TSW\Caltrains\NipponCabParkingBrake.cs" />
     <Compile Include="TSW\CSX\AC4400CW.cs" />
     <Compile Include="TSW\CSX\GP38_2.cs" />
     <Compile Include="TSW\CSX\SD40_2AutoBrake.cs" />

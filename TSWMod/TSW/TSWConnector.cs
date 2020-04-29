@@ -252,6 +252,10 @@ namespace TSWMod.TSW
                 {
                     _foundLocomotives.Add(ptr, new F40PH(_m, ptr, _currentProcess.MainWindowHandle));
                 }
+                else if (possibleName.Contains(NipponCab.NamePartial))
+                {
+                    _foundLocomotives.Add(ptr, new NipponCab(_m, ptr, _currentProcess.MainWindowHandle));
+                }
             }
         }
 
