@@ -23,7 +23,7 @@ namespace TSWMod.TSW.CSX
             if (!_bailOff && CurrentValue.AlmostEquals(0.2f))
             {
                 _bailOff = true;
-                InputHelpers.KeyDown(HWND, InputHelpers.VKCodes.VK_OEM_4);
+                InputHelpers.KeyComboDown(HWND, KeyboardLayoutManager.Current.IndependentBrakeDecrease);
             }
         }
 
@@ -31,7 +31,7 @@ namespace TSWMod.TSW.CSX
         {
             if (_bailOff)
             {
-                InputHelpers.KeyUp(HWND, InputHelpers.VKCodes.VK_OEM_4);
+                InputHelpers.KeyComboUp(HWND, KeyboardLayoutManager.Current.IndependentBrakeDecrease);
                 _bailOff = false;
             }
         }
