@@ -237,8 +237,18 @@ namespace TSWMod.TSW
                 }
                 else if (possibleName.Contains(GP38_2.NamePartial))
                 {
-                    // 2 variants of GP38-2 are present
-                    _foundLocomotives.Add(ptr, new GP38_2(_m, ptr, _currentProcess.MainWindowHandle, possibleName.Contains(GP38_2.YN3NamePartial)));
+                    if (possibleName.Contains(GP38_2.YN3NamePartial))
+                    {
+                        _foundLocomotives.Add(ptr, GP38_2.CreateNECVersion(_m, ptr, _currentProcess.MainWindowHandle));
+                    }
+                    else if (possibleName.Contains(GP38_2.SFJPartial))
+                    {
+                        _foundLocomotives.Add(ptr, GP38_2.CreateSFJVersion(_m, ptr, _currentProcess.MainWindowHandle));
+                    }
+                    else
+                    {
+                        _foundLocomotives.Add(ptr, GP38_2.CreateCSXHeavyHaulVersion(_m, ptr, _currentProcess.MainWindowHandle));
+                    }
                 }
                 else if (possibleName.Contains(ACS_64.NamePartial))
                 {
