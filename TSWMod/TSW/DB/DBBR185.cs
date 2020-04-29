@@ -41,6 +41,11 @@ namespace TSWMod.TSW.DB
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A08)));
             _directBrakeLeverF = new DBDirectBrakeLever(m, hWnd,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0948)));
+            _lightF = new DBLightSelector(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x09E8)));
+            _wiperF = new DBWiperSelector(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0698)));
+
 
             _hornLeverBR = new HornLever(m,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0748)));
@@ -52,6 +57,10 @@ namespace TSWMod.TSW.DB
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0838)));
             _directBrakeLeverB = new DBDirectBrakeLever(m, hWnd,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0720)));
+            _lightB = new DBLightSelector(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0828)));
+            _wiperB = new DBWiperSelector(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0690)));
         }
 
         public bool CheckPlayerCalibration()
@@ -84,6 +93,8 @@ namespace TSWMod.TSW.DB
                 _throttleLeverF.OnControlLoop(state.Throttle);
                 _trainBrakeLeverF.OnControlLoop(state.AutoBrake);
                 _directBrakeLeverF.OnControlLoop(state.IndependentBrake);
+                _lightF.OnControlLoop(state.LightTranslated);
+                _wiperF.OnControlLoop(state.WiperTranslated);
             }
             else
             {
@@ -91,6 +102,8 @@ namespace TSWMod.TSW.DB
                 _throttleLeverB.OnControlLoop(state.Throttle);
                 _trainBrakeLeverB.OnControlLoop(state.AutoBrake);
                 _directBrakeLeverB.OnControlLoop(state.IndependentBrake);
+                _lightB.OnControlLoop(state.LightTranslated);
+                _wiperB.OnControlLoop(state.WiperTranslated);
             }
         }
 
@@ -128,5 +141,9 @@ namespace TSWMod.TSW.DB
         private readonly DBAFBLever _afbLeverB;
         private readonly DBTrainBrakeLever _trainBrakeLeverB;
         private readonly DBDirectBrakeLever _directBrakeLeverB;
+        private readonly DBLightSelector _lightF;
+        private readonly DBWiperSelector _wiperF;
+        private readonly DBLightSelector _lightB;
+        private readonly DBWiperSelector _wiperB;
     }
 }

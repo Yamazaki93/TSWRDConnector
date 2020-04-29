@@ -270,12 +270,14 @@ namespace TSWMod.RailDriver
                 _independentBrake = new RDIndependentBrake(independentBrakeMin, independentBrakeMax, bailOffEngagedMin, bailOffDisengagedMin);
 
                 ParseIntFromCalibrationLine(text[98], out var wiperMin);
+                ParseIntFromCalibrationLine(text[103], out var wiperMiddle);
                 ParseIntFromCalibrationLine(text[109], out var wiperMax);
-                _wiper = new RDWiper(wiperMin, wiperMax);
+                _wiper = new RDWiper(wiperMin, wiperMax, wiperMiddle);
 
                 ParseIntFromCalibrationLine(text[113], out var lightMin);
+                ParseIntFromCalibrationLine(text[118], out var lightMiddle);
                 ParseIntFromCalibrationLine(text[124], out var lightMax);
-                _light = new RDLight(lightMin, lightMax);
+                _light = new RDLight(lightMin, lightMax, lightMiddle);
 
                 Logger.Info("RD calibration loaded");
                 Logger.Info($"Reverser {_reverser.Min} - {_reverser.Max}");
@@ -345,7 +347,7 @@ namespace TSWMod.RailDriver
                     Logger.Trace($"RD Lever Changed " +
                                  $"{_reverser.CurrentValueScaled}/{_reverser.TranslatedValue} - {_throttle.CurrentValueScaled}/{_throttle.TranslatedThrottleValue}/{_throttle.TranslatedDynamicBrakeValue}" +
                                  $" - {_autoBrake.CurrentValueScaled}/{_autoBrake.TranslatedValue} - {_independentBrake.CurrentValueScaled}/BO:{_independentBrake.BailOffEngaged} - " +
-                                 $"{_wiper.CurrentValueScaled} - {_light.CurrentValueScaled}");
+                                 $"{_wiper.CurrentValueScaled}/{_wiper.GetTranslatedValue()} - {_light.CurrentValueScaled}/{_light.GetTranslatedValue()}");
                     var state = new RailDriverLeverState(
                         _reverser.CurrentValueScaled, 
                         _throttle.CurrentValueScaled, 
@@ -357,7 +359,9 @@ namespace TSWMod.RailDriver
                         _throttle.TranslatedThrottleValue,
                         _throttle.TranslatedDynamicBrakeValue,
                         _autoBrake.TranslatedValue,
-                        _independentBrake.BailOffEngaged);
+                        _independentBrake.BailOffEngaged,
+                        _light.GetTranslatedValue(),
+                        _wiper.GetTranslatedValue());
                     CurrentLeverState = state;
                     LeverChanged?.Invoke(this, new RailDriverLeverUpdatedEvent(state));
                 }
@@ -375,7 +379,9 @@ namespace TSWMod.RailDriver
                             _throttle.TranslatedThrottleValue,
                             _throttle.TranslatedDynamicBrakeValue,
                             _autoBrake.TranslatedValue,
-                            _independentBrake.BailOffEngaged);
+                            _independentBrake.BailOffEngaged,
+                            _light.GetTranslatedValue(),
+                            _wiper.GetTranslatedValue());
                 }
 
                 var buttonValue = BitConverter.ToUInt64(data.Skip(8).Take(6).Append((byte)0).Append((byte)0).ToArray(), 0);

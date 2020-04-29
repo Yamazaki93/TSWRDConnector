@@ -22,6 +22,8 @@ namespace TSWMod.TSW
         InputHelpers.VKCodes[] Horn2 { get; }
         InputHelpers.VKCodes[] IndependentBrakeDecrease { get; }
         InputHelpers.VKCodes[] IndependentBrakeIncrease { get; }
+        InputHelpers.VKCodes[] LightDecrease { get; }
+        InputHelpers.VKCodes[] LightIncrease { get; }
         InputHelpers.VKCodes[] PZBAck { get; }
         InputHelpers.VKCodes[] PZBOverride { get; }
         InputHelpers.VKCodes[] PZBRelease { get; }
@@ -32,5 +34,7 @@ namespace TSWMod.TSW
         InputHelpers.VKCodes[] Sand { get; }
         InputHelpers.VKCodes[] ThrottleDecrease { get; }
         InputHelpers.VKCodes[] ThrottleIncrease { get; }
+        InputHelpers.VKCodes[] WiperDecrease { get; }
+        InputHelpers.VKCodes[] WiperIncrease { get; }
     }
 }

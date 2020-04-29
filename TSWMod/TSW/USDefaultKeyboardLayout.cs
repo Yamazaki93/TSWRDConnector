@@ -22,6 +22,8 @@ namespace TSWMod.TSW
         public virtual InputHelpers.VKCodes[] Horn2 => new[] { InputHelpers.VKCodes.VK_N };
         public virtual InputHelpers.VKCodes[] IndependentBrakeDecrease => new[] { InputHelpers.VKCodes.VK_OEM_4 };
         public virtual InputHelpers.VKCodes[] IndependentBrakeIncrease => new[] { InputHelpers.VKCodes.VK_OEM_6 };
+        public InputHelpers.VKCodes[] LightDecrease => new[] { InputHelpers.VKCodes.VK_LSHIFT, InputHelpers.VKCodes.VK_H };
+        public InputHelpers.VKCodes[] LightIncrease => new[] { InputHelpers.VKCodes.VK_H };
         public virtual InputHelpers.VKCodes[] PZBAck => new[] { InputHelpers.VKCodes.VK_NEXT };
         public virtual InputHelpers.VKCodes[] PZBOverride => new[] { InputHelpers.VKCodes.VK_DELETE };
         public virtual InputHelpers.VKCodes[] PZBRelease => new[] { InputHelpers.VKCodes.VK_END };
@@ -32,5 +34,7 @@ namespace TSWMod.TSW
         public virtual InputHelpers.VKCodes[] Sand => new[] { InputHelpers.VKCodes.VK_X };
         public virtual InputHelpers.VKCodes[] ThrottleDecrease => new[] { InputHelpers.VKCodes.VK_D };
         public virtual InputHelpers.VKCodes[] ThrottleIncrease => new[] { InputHelpers.VKCodes.VK_A };
+        public InputHelpers.VKCodes[] WiperDecrease => new[] { InputHelpers.VKCodes.VK_LSHIFT, InputHelpers.VKCodes.VK_V };
+        public InputHelpers.VKCodes[] WiperIncrease => new[] { InputHelpers.VKCodes.VK_V };
     }
 }

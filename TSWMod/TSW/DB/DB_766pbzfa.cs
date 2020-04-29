@@ -38,6 +38,10 @@ namespace TSWMod.TSW.DB
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0870)));
             _directBrakeLeverF = new DBDirectBrakeLever(m, hWnd,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0840)));
+            _light = new DBLightSelector(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0860)));
+            _wiper = new DBWiperSelector(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0830)));
         }
 
         public bool CheckPlayerCalibration()
@@ -60,6 +64,8 @@ namespace TSWMod.TSW.DB
             _throttleLeverF.OnControlLoop(state.Throttle);
             _trainBrakeLeverF.OnControlLoop(state.AutoBrake);
             _directBrakeLeverF.OnControlLoop(state.IndependentBrake);
+            _light.OnControlLoop(state.LightTranslated);
+            _wiper.OnControlLoop(state.WiperTranslated);
         }
 
         public void Close()
@@ -89,5 +95,7 @@ namespace TSWMod.TSW.DB
         private readonly UIntPtr _basePtr;
         private readonly DBTrainBrakeLever _trainBrakeLeverF;
         private readonly DBDirectBrakeLever _directBrakeLeverF;
+        private readonly DBLightSelector _light;
+        private readonly DBWiperSelector _wiper;
     }
 }
