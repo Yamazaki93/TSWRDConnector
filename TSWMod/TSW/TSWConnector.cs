@@ -7,6 +7,7 @@ using System.Timers;
 using Memory;
 using Newtonsoft.Json.Linq;
 using TSWMod.RailDriver;
+using TSWMod.TSW.Caltrains;
 using TSWMod.TSW.CSX;
 using TSWMod.TSW.DB;
 using TSWMod.TSW.LIRR;
@@ -246,6 +247,10 @@ namespace TSWMod.TSW
                 else if (possibleName.Contains(M7.NamePartial))
                 {
                     _foundLocomotives.Add(ptr, new M7(_m, ptr, _currentProcess.MainWindowHandle));
+                }
+                else if (possibleName.Contains(F40PH.NamePartial))
+                {
+                    _foundLocomotives.Add(ptr, new F40PH(_m, ptr, _currentProcess.MainWindowHandle));
                 }
             }
         }

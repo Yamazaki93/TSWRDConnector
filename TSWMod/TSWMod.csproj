@@ -112,6 +112,10 @@
     <Compile Include="RailDriver\RailDriverLeverUpdatedEvent.cs" />
     <Compile Include="RailDriver\RDReverser.cs" />
     <Compile Include="RailDriver\RDThrottleDynamicBrake.cs" />
+    <Compile Include="TSW\Caltrains\F40PH.cs" />
+    <Compile Include="TSW\Caltrains\F40PHAutomaticBrake.cs" />
+    <Compile Include="TSW\Caltrains\F40PHIndependentBrake.cs" />
+    <Compile Include="TSW\Caltrains\F40PHDynamicBrake.cs" />
     <Compile Include="TSW\CSX\AC4400CW.cs" />
     <Compile Include="TSW\CSX\GP38_2.cs" />
     <Compile Include="TSW\CSX\SD40_2AutoBrake.cs" />
