@@ -1,11 +1,11 @@
 ﻿using System;
 using Memory;
 
-namespace TSWMod.TSW.DB
+namespace TSWMod.TSW
 {
-    class DBWiperSelector : TSWLever
+    class GenericWiperSelector : TSWLever
     {
-        public DBWiperSelector(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, true)
+        public GenericWiperSelector(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, true)
         {
         }
 

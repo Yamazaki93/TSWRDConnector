@@ -126,7 +126,7 @@
     <Compile Include="TSW\CSX\PlusMinusReverser.cs" />
     <Compile Include="TSW\CSX\AC4400CWThrottle.cs" />
     <Compile Include="TSW\CSX\EightNotchThrottle.cs" />
-    <Compile Include="TSW\DB\DBWiperSelector.cs" />
+    <Compile Include="TSW\GenericWiperSelector.cs" />
     <Compile Include="TSW\DB\DBLightSelector.cs" />
     <Compile Include="TSW\FrenchDefaultKeyboardLayout.cs" />
     <Compile Include="TSW\HornButton.cs" />

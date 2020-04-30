@@ -40,7 +40,7 @@ namespace TSWMod.TSW.DB
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0840)));
             _light = new DBLightSelector(m, hWnd,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0860)));
-            _wiper = new DBWiperSelector(m, hWnd,
+            _wiper = new GenericWiperSelector(m, hWnd,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0830)));
         }
 
@@ -96,6 +96,6 @@ namespace TSWMod.TSW.DB
         private readonly DBTrainBrakeLever _trainBrakeLeverF;
         private readonly DBDirectBrakeLever _directBrakeLeverF;
         private readonly DBLightSelector _light;
-        private readonly DBWiperSelector _wiper;
+        private readonly GenericWiperSelector _wiper;
     }
 }
