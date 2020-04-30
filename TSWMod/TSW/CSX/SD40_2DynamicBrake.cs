@@ -9,54 +9,25 @@ namespace TSWMod.TSW.CSX
 {
     class SD40_2DynamicBrake : TSWLever
     {
-        public SD40_2DynamicBrake(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, false)
+        public SD40_2DynamicBrake(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr)
         {
         }
 
         protected override float TargetValuePreTransform(float raw)
         {
-            if (raw < 0.10)
+            if (raw < 0.01)
             {
                 return 0;
             }
 
-            if (raw < 0.26)
+            if (raw.AlmostEquals(0.02f))
             {
                 return 0.14f;  //initial setup
             }
 
-            return raw;
+            return raw * 0.78f + 0.22f;
         }
-
-        protected override void OnDifferentValue(float diff)
-        {
-            if (diff < 0)
-            {
-                if (_currentKeyDown == '.')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_PERIOD);
-                }
-                _currentKeyDown = ',';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_COMMA);
-            }
-            else
-            {
-                if (_currentKeyDown == ',')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_COMMA);
-                }
-                _currentKeyDown = '.';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_PERIOD);
-            }
-        }
-
-        protected override void OnSameValue()
-        {
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_PERIOD);
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_COMMA);
-        }
-
-
-        private char _currentKeyDown = ' ';
+        protected override InputHelpers.VKCodes[] IncreaseKeys => KeyboardLayoutManager.Current.DynamicBrakeIncrease;
+        protected override InputHelpers.VKCodes[] DecreaseKeys => KeyboardLayoutManager.Current.DynamicBrakeDecrease;
     }
 }

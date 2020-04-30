@@ -27,35 +27,9 @@ namespace TSWMod.TSW.DB
             return 1 - raw;
         }
 
-        protected override void OnDifferentValue(float diff)
-        {
-            if (diff < 0)
-            {
-                if (_currentKeyDown == ']')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_6);
-                }
-                _currentKeyDown = '[';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
-            }
-            else
-            {
-                if (_currentKeyDown == '[')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
-                }
-                _currentKeyDown = ']';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_6);
-            }
-        }
-
-        protected override void OnSameValue()
-        {
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_6);
-        }
-
-
-        private char _currentKeyDown = ' ';
+        protected override InputHelpers.VKCodes[] IncreaseKeys =>
+            KeyboardLayoutManager.Current.IndependentBrakeIncrease;
+        protected override InputHelpers.VKCodes[] DecreaseKeys =>
+            KeyboardLayoutManager.Current.IndependentBrakeDecrease;
     }
 }

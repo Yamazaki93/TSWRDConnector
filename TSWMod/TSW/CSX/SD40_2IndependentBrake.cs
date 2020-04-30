@@ -9,7 +9,7 @@ namespace TSWMod.TSW.CSX
 {
     class SD40_2IndependentBrake : TSWLever
     {
-        public SD40_2IndependentBrake(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, false)
+        public SD40_2IndependentBrake(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr)
         {
         }
 
@@ -23,43 +23,12 @@ namespace TSWMod.TSW.CSX
             return raw * 0.75f + 0.25f;
         }
 
-        protected override void OnDifferentValue(float diff)
-        {
-            if (_bailOff)
-            {
-                return;
-            }
-            if (diff < 0)
-            {
-                if (_currentKeyDown == ']')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_6);
-                }
-                _currentKeyDown = '[';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
-            }
-            else
-            {
-                if (_currentKeyDown == '[')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
-                }
-                _currentKeyDown = ']';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_6);
-            }
-        }
-
-        protected override void OnSameValue()
-        {
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_6);
-        }
         public void EngageBailOffIfNeeded()
         {
             if (!_bailOff && CurrentValue.AlmostEquals(0.25f))
             {
                 _bailOff = true;
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
+                InputHelpers.KeyComboDown(HWND, KeyboardLayoutManager.Current.IndependentBrakeDecrease);
             }
         }
 
@@ -67,13 +36,15 @@ namespace TSWMod.TSW.CSX
         {
             if (_bailOff)
             {
-                InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_4);
+                InputHelpers.KeyComboUp(HWND, KeyboardLayoutManager.Current.IndependentBrakeDecrease);
                 _bailOff = false;
             }
         }
+        protected override InputHelpers.VKCodes[] IncreaseKeys =>
+            KeyboardLayoutManager.Current.IndependentBrakeIncrease;
+        protected override InputHelpers.VKCodes[] DecreaseKeys =>
+            KeyboardLayoutManager.Current.IndependentBrakeDecrease;
 
-
-        private char _currentKeyDown = ' ';
         private bool _bailOff;
     }
 }

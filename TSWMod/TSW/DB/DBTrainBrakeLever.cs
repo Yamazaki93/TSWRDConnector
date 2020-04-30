@@ -15,36 +15,7 @@ namespace TSWMod.TSW.DB
             return target;
         }
 
-
-        protected override void OnDifferentValue(float diff)
-        {
-            if (diff < 0)
-            {
-                if (_currentKeyDown == '"')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_7);
-                }
-                _currentKeyDown = ';';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_1);
-            }
-            else
-            {
-                if (_currentKeyDown == '"')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_1);
-                }
-                _currentKeyDown = ';';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_OEM_7);
-            }
-        }
-
-        protected override void OnSameValue()
-        {
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_1);
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_OEM_7);
-        }
-
-
-        private char _currentKeyDown = ' ';
+        protected override InputHelpers.VKCodes[] IncreaseKeys => KeyboardLayoutManager.Current.AutomaticBrakeIncrease;
+        protected override InputHelpers.VKCodes[] DecreaseKeys => KeyboardLayoutManager.Current.AutomaticBrakeDecrease;
     }
 }

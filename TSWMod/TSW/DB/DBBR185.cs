@@ -9,21 +9,23 @@ namespace TSWMod.TSW.DB
     class DB185_2 : ILocomotive
     {
         public const string NamePartial = "DB_BR185-2";
-        private readonly IDictionary<int, InputHelpers.VirtualKeyStates> DefaultKeyMappings = new Dictionary<int, InputHelpers.VirtualKeyStates>
-        {
-            { 2, InputHelpers.VirtualKeyStates.VK_NEXT },  // PZB Ack
-            { 3, InputHelpers.VirtualKeyStates.VK_END },  // PZB Release
-            { 4, InputHelpers.VirtualKeyStates.VK_DELETE },  // PZB Override
-            { 34, InputHelpers.VirtualKeyStates.VK_W },  // Reverser
-            { 35, InputHelpers.VirtualKeyStates.VK_S },  
-            { 36, InputHelpers.VirtualKeyStates.VK_BACK },  // Emergency brake
-            { 37, InputHelpers.VirtualKeyStates.VK_BACK },
-            { 38, InputHelpers.VirtualKeyStates.VK_Q },
-            { 39, InputHelpers.VirtualKeyStates.VK_X },
-            { 40, InputHelpers.VirtualKeyStates.VK_P },
-            { 42, InputHelpers.VirtualKeyStates.VK_SPACE },   // Horn
-            { 43, InputHelpers.VirtualKeyStates.VK_N },
-        }; 
+        private IDictionary<int, InputHelpers.VKCodes[]> DefaultKeyMappings =>
+            new Dictionary<int, InputHelpers.VKCodes[]>
+            {
+                {2, KeyboardLayoutManager.Current.PZBAck}, // PZB Ack
+                {3, KeyboardLayoutManager.Current.PZBRelease}, // PZB Release
+                {4, KeyboardLayoutManager.Current.PZBOverride}, // PZB Override
+                {5, KeyboardLayoutManager.Current.CruiseControlToggle},
+                {34, KeyboardLayoutManager.Current.ReverserIncrease}, // Reverser
+                {35, KeyboardLayoutManager.Current.ReverserDecrease},
+                {36, KeyboardLayoutManager.Current.EmergencyBrake}, // Emergency brake
+                {37, KeyboardLayoutManager.Current.EmergencyBrake},
+                {38, KeyboardLayoutManager.Current.AlerterReset},
+                {39, KeyboardLayoutManager.Current.Sand},
+                {40, KeyboardLayoutManager.Current.PantographRaise},
+                {42, KeyboardLayoutManager.Current.Horn1}, // Horn
+                {43, KeyboardLayoutManager.Current.Horn2},
+            };
 
         public DB185_2(Mem m, UIntPtr basePtr, IntPtr hWnd)
         {
@@ -100,7 +102,7 @@ namespace TSWMod.TSW.DB
         {
         }
 
-        public IDictionary<int, InputHelpers.VirtualKeyStates> GetButtonMappings()
+        public IDictionary<int, InputHelpers.VKCodes[]> GetButtonMappings()
         {
             return DefaultKeyMappings;
         }

@@ -120,6 +120,7 @@
     <Compile Include="TSW\CSX\PlusMinusReverser.cs" />
     <Compile Include="TSW\CSX\AC4400CWThrottle.cs" />
     <Compile Include="TSW\CSX\EightNotchThrottle.cs" />
+    <Compile Include="TSW\FrenchDefaultKeyboardLayout.cs" />
     <Compile Include="TSW\HornButton.cs" />
     <Compile Include="TSW\CSX\SD40_2.cs" />
     <Compile Include="TSW\CSX\SD40_2DynamicBrake.cs" />
@@ -132,7 +133,11 @@
     <Compile Include="TSW\DB\DBThrottleLever.cs" />
     <Compile Include="TSW\DB\DBTrainBrakeLever.cs" />
     <Compile Include="TSW\HornLever.cs" />
+    <Compile Include="TSW\IKeyboardLayout.cs" />
     <Compile Include="TSW\ILocomotive.cs" />
+    <Compile Include="TSW\KeyboardLayoutManager.cs" />
+    <Compile Include="TSW\LIRR\M7.cs" />
+    <Compile Include="TSW\LIRR\M7MasterController.cs" />
     <Compile Include="TSW\MemExtensions.cs" />
     <Compile Include="TSW\NEC\ACSMasterController.cs" />
     <Compile Include="TSW\NEC\ACS_64.cs" />
@@ -144,6 +149,7 @@
     <Compile Include="TSW\TSWConnector.cs" />
     <Compile Include="TSW\TSWLever.cs" />
     <Compile Include="TSW\TSWMapChangedEvent.cs" />
+    <Compile Include="TSW\USDefaultKeyboardLayout.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

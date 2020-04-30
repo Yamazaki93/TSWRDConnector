@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using TSWMod.RailDriver;
 using TSWMod.TSW.CSX;
 using TSWMod.TSW.DB;
+using TSWMod.TSW.LIRR;
 using TSWMod.TSW.NEC;
 using Timer = System.Timers.Timer;
 
@@ -31,6 +32,19 @@ namespace TSWMod.TSW
 
         private const string GenericMapNamePrefix = "GenericDiorama"; // Main menu world name
 
+        private static readonly IDictionary<int, InputHelpers.VKCodes[]> GameControlKeys =  new Dictionary<int, InputHelpers.VKCodes[]>
+        {
+            {0, new []{InputHelpers.VKCodes.VK_E }},
+            {1, new []{InputHelpers.VKCodes.VK_ESCAPE }},
+            {14,new []{ InputHelpers.VKCodes.VK_1 }},
+            {15,new []{ InputHelpers.VKCodes.VK_2 }},
+            {16,new []{ InputHelpers.VKCodes.VK_3 }},
+            {17,new []{ InputHelpers.VKCodes.VK_8 }},
+            {18,new []{ InputHelpers.VKCodes.VK_F1 }},
+            {19,new []{ InputHelpers.VKCodes.VK_9 }},
+
+        };
+
         public TSWConnector(RailDriverConnector rd)
         {
             _rd = rd;
@@ -51,6 +65,13 @@ namespace TSWMod.TSW
             _foundLocomotives = new Dictionary<UIntPtr, ILocomotive>();
             rd.ButtonPressed += RdOnButtonPressed;
             rd.ButtonReleased += RdOnButtonReleased;
+            KeyboardLayoutManager.Current = new USDefaultKeyboardLayout();
+
+            var keyboard = System.Windows.Forms.InputLanguage.CurrentInputLanguage.Culture.Name;
+            if (keyboard == "fr-FR")
+            {
+                KeyboardLayoutManager.Current = new FrenchDefaultKeyboardLayout();
+            }
         }
 
         public JObject GetCurrentLocomotiveConfig()
@@ -74,7 +95,11 @@ namespace TSWMod.TSW
             var mapping = _currentLocomotive?.GetButtonMappings();
             if (mapping != null && mapping.ContainsKey(e.KeyCode))
             {
-                InputHelpers.KeyUp(_currentProcess.MainWindowHandle, mapping[e.KeyCode]);
+                InputHelpers.KeyComboUp(_currentProcess.MainWindowHandle, mapping[e.KeyCode]);
+            }
+            else if (GameControlKeys.ContainsKey(e.KeyCode))
+            {
+                InputHelpers.KeyComboUp(_currentProcess.MainWindowHandle, GameControlKeys[e.KeyCode]);
             }
         }
 
@@ -93,10 +118,15 @@ namespace TSWMod.TSW
                 var mapping = _currentLocomotive?.GetButtonMappings();
                 if (mapping != null && mapping.ContainsKey(e.KeyCode))
                 {
-                    InputHelpers.KeyDown(_currentProcess.MainWindowHandle, mapping[e.KeyCode]);
+                    InputHelpers.KeyComboDown(_currentProcess.MainWindowHandle, mapping[e.KeyCode]);
+                }
+                else if (GameControlKeys.ContainsKey(e.KeyCode))
+                {
+                    InputHelpers.KeyComboDown(_currentProcess.MainWindowHandle, GameControlKeys[e.KeyCode]);
                 }
             }
         }
+
 
         private void TswControlLoopOnElapsed(object sender, ElapsedEventArgs e)
         {
@@ -206,11 +236,16 @@ namespace TSWMod.TSW
                 }
                 else if (possibleName.Contains(GP38_2.NamePartial))
                 {
-                    _foundLocomotives.Add(ptr, new GP38_2(_m, ptr, _currentProcess.MainWindowHandle));
+                    // 2 variants of GP38-2 are present
+                    _foundLocomotives.Add(ptr, new GP38_2(_m, ptr, _currentProcess.MainWindowHandle, possibleName.Contains(GP38_2.YN3NamePartial)));
                 }
                 else if (possibleName.Contains(ACS_64.NamePartial))
                 {
                     _foundLocomotives.Add(ptr, new ACS_64(_m, ptr, _currentProcess.MainWindowHandle));
+                }
+                else if (possibleName.Contains(M7.NamePartial))
+                {
+                    _foundLocomotives.Add(ptr, new M7(_m, ptr, _currentProcess.MainWindowHandle));
                 }
             }
         }

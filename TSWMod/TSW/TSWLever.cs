@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Memory;
 
 namespace TSWMod.TSW
@@ -10,12 +11,12 @@ namespace TSWMod.TSW
         protected const ulong SpeedMultiplierOffset = 0x051C;   // Adjustment speed multiplier?
 
 
-        protected TSWLever(Mem m, IntPtr hWnd, UIntPtr basePtr, bool hasNotch = false)
+        protected TSWLever(Mem m, IntPtr hWnd, UIntPtr basePtr, bool isNotch = false)
         {
             _m = m;
             _hWnd = hWnd;
             _basePtr = basePtr;
-            _hasNotch = hasNotch;
+            _isNotch = isNotch;
         }
 
         public virtual void OnControlLoop(float targetValue)
@@ -49,14 +50,14 @@ namespace TSWMod.TSW
             if (targetValue.AlmostEquals(currentValue) && _isChanging)  // if value is ok
             {
                 _isChanging = false;
-                _coolingOff = _hasNotch;
+                _coolingOff = _isNotch;
                 _coolOffCounter = NotchCoolOff;
                 OnSameValue();
             }
             else if (!targetValue.AlmostEquals(currentValue)) // if value not ok
             {
                 _isChanging = true;
-                _rampingUp = _hasNotch;
+                _rampingUp = _isNotch;
                 _rampUpTimer = NotchRampUp;
                 OnDifferentValue(currentDiff);
             }
@@ -64,7 +65,7 @@ namespace TSWMod.TSW
             if (_previousDiff * currentDiff < 0) // sign change on diff value, bouncing
             {
                 _isChanging = false;
-                _coolingOff = _hasNotch;
+                _coolingOff = _isNotch;
                 _coolOffCounter = NotchCoolOff;
                 OnSameValue();
             }
@@ -80,21 +81,53 @@ namespace TSWMod.TSW
         {
             return raw;
         }
+
         // diff = target - current
-        protected abstract void OnDifferentValue(float diff);
-        protected abstract void OnSameValue();
-        public float CurrentValue => _hasNotch ?
+        protected virtual void OnDifferentValue(float diff)
+        {
+            if (diff < 0)
+            {
+                if (_currentKeyDown.SequenceEqual(IncreaseKeys))
+                {
+                    InputHelpers.KeyComboUp(_hWnd, IncreaseKeys);
+                }
+                _currentKeyDown = DecreaseKeys;
+                InputHelpers.KeyComboDown(_hWnd, DecreaseKeys);
+            }
+            else
+            {
+                if (_currentKeyDown.SequenceEqual(DecreaseKeys))
+                {
+                    InputHelpers.KeyComboUp(_hWnd, DecreaseKeys);
+                }
+                _currentKeyDown = IncreaseKeys;
+                InputHelpers.KeyComboDown(_hWnd, IncreaseKeys);
+            }
+        }
+
+        protected virtual void OnSameValue()
+        {
+            InputHelpers.KeyComboUp(_hWnd, IncreaseKeys);
+            InputHelpers.KeyComboUp(_hWnd, DecreaseKeys);
+        }
+
+        protected abstract InputHelpers.VKCodes[] IncreaseKeys { get; }
+        protected abstract InputHelpers.VKCodes[] DecreaseKeys { get; }
+
+        public float CurrentValue => _isNotch ?
             Convert.ToSingle(Math.Round(_m.ReadFloat(_m.GetCodeRepresentation((UIntPtr)((ulong)_basePtr + AdjustedValueOffset))), 2)):
             _m.ReadFloat(_m.GetCodeRepresentation((UIntPtr)((ulong)_basePtr + AbsoluteValueOffset)));
         protected IntPtr HWND => _hWnd;
 
         protected int NotchCoolOff = 7;  // A cool off period for notch like lever
         protected int NotchRampUp = 0;  // Ramp up period for notch like lever (for slow notches)
+
+        private InputHelpers.VKCodes[] _currentKeyDown = { };
         private float _previousDiff;
         private readonly Mem _m;
         private readonly IntPtr _hWnd;
         private readonly UIntPtr _basePtr;
-        private readonly bool _hasNotch;
+        private readonly bool _isNotch;
         private bool _isChanging;
         private bool _coolingOff;
         private int _coolOffCounter;

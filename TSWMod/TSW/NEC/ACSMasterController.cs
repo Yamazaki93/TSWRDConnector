@@ -12,36 +12,8 @@ namespace TSWMod.TSW.NEC
     // -1 = full dynamic brake
     class ACSMasterController : TSWLever
     {
-        public ACSMasterController(Mem m, IntPtr hWnd, UIntPtr basePtr, bool hasNotch = false) : base(m, hWnd, basePtr, hasNotch)
+        public ACSMasterController(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr)
         {
-        }
-
-        protected override void OnDifferentValue(float diff)
-        {
-            if (diff < 0)
-            {
-                if (_currentKeyDown == 'a')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_A);
-                }
-                _currentKeyDown = 'd';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_D);
-            }
-            else
-            {
-                if (_currentKeyDown == 'd')
-                {
-                    InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_D);
-                }
-                _currentKeyDown = 'a';
-                InputHelpers.KeyDown(HWND, InputHelpers.VirtualKeyStates.VK_A);
-            }
-        }
-
-        protected override void OnSameValue()
-        {
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_D);
-            InputHelpers.KeyUp(HWND, InputHelpers.VirtualKeyStates.VK_A);
         }
 
         public float TranslateCombinedValue(float throttle, float dynamicBrake)
@@ -58,7 +30,7 @@ namespace TSWMod.TSW.NEC
 
             return 0;
         }
-
-        private char _currentKeyDown = ' ';
+        protected override InputHelpers.VKCodes[] IncreaseKeys => KeyboardLayoutManager.Current.ThrottleIncrease;
+        protected override InputHelpers.VKCodes[] DecreaseKeys => KeyboardLayoutManager.Current.ThrottleDecrease;
     }
 }
