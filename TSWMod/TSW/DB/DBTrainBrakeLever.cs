@@ -7,7 +7,8 @@ namespace TSWMod.TSW.DB
     {
         public DBTrainBrakeLever(Mem mem, IntPtr hWnd, UIntPtr basePtr) : base(mem, hWnd, basePtr, true)
         {
-            NotchRampUp = 2;
+            NotchCoolOff = 10;
+            NotchRampUp = 5;
         }
 
         protected override float TargetValuePreTransform(float raw)
