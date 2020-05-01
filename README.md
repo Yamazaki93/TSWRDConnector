@@ -85,6 +85,7 @@ The full list of supported trains and their respective packages:
  - CSX Heavy Haul GP38-2
  - NEC ACS-64
  - NEC GP38-2
+ - LIRR M7
 
 ## Known Issues and Limitations
 

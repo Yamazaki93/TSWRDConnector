@@ -33,17 +33,26 @@ namespace TSWMod.TSW
 
         private const string GenericMapNamePrefix = "GenericDiorama"; // Main menu world name
 
-        private static readonly IDictionary<int, InputHelpers.VKCodes[]> GameControlKeys =  new Dictionary<int, InputHelpers.VKCodes[]>
+        private IDictionary<int, InputHelpers.VKCodes[]> GameControlKeys => new Dictionary<int, InputHelpers.VKCodes[]>
         {
             {0, new []{InputHelpers.VKCodes.VK_E }},
             {1, new []{InputHelpers.VKCodes.VK_ESCAPE }},
+            {6, KeyboardLayoutManager.Current.WarningDevice },
+            {7, KeyboardLayoutManager.Current.SignalingSystem },
+            {8, KeyboardLayoutManager.Current.MasterSwitch },
+            {9, KeyboardLayoutManager.Current.HandbrakeToggle },
             {14,new []{ InputHelpers.VKCodes.VK_1 }},
             {15,new []{ InputHelpers.VKCodes.VK_2 }},
             {16,new []{ InputHelpers.VKCodes.VK_3 }},
             {17,new []{ InputHelpers.VKCodes.VK_8 }},
             {18,new []{ InputHelpers.VKCodes.VK_F1 }},
             {19,new []{ InputHelpers.VKCodes.VK_9 }},
-
+            {20, KeyboardLayoutManager.Current.CabLightIncrease},
+            {21, KeyboardLayoutManager.Current.CabLightDecrease},
+            {30, new []{InputHelpers.VKCodes.VK_UP} },
+            {32, new []{InputHelpers.VKCodes.VK_RIGHT} },
+            {33, new []{InputHelpers.VKCodes.VK_DOWN} },
+            {34, new []{InputHelpers.VKCodes.VK_LEFT} },
         };
 
         public TSWConnector(RailDriverConnector rd)

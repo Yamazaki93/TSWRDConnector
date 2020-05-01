@@ -19,6 +19,8 @@ namespace TSWMod.TSW
         public override InputHelpers.VKCodes[] IndependentBrakeDecrease => new[] { InputHelpers.VKCodes.VK_OEM_6 };
         public override InputHelpers.VKCodes[] IndependentBrakeIncrease => new[] { InputHelpers.VKCodes.VK_OEM_1 };
 
+        public override InputHelpers.VKCodes[] MasterSwitch => new[] { InputHelpers.VKCodes.VK_LCONTROL, InputHelpers.VKCodes.VK_Z };
+
         public override InputHelpers.VKCodes[] ReverserIncrease => new[] { InputHelpers.VKCodes.VK_Z };
 
         public override InputHelpers.VKCodes[] ThrottleIncrease => new[] { InputHelpers.VKCodes.VK_Q };
