@@ -50,9 +50,9 @@ namespace TSWMod.TSW
             {20, KeyboardLayoutManager.Current.CabLightIncrease},
             {21, KeyboardLayoutManager.Current.CabLightDecrease},
             {30, new []{InputHelpers.VKCodes.VK_UP} },
-            {32, new []{InputHelpers.VKCodes.VK_RIGHT} },
-            {33, new []{InputHelpers.VKCodes.VK_DOWN} },
-            {34, new []{InputHelpers.VKCodes.VK_LEFT} },
+            {31, new []{InputHelpers.VKCodes.VK_RIGHT} },
+            {32, new []{InputHelpers.VKCodes.VK_DOWN} },
+            {33, new []{InputHelpers.VKCodes.VK_LEFT} },
         };
 
         public TSWConnector(RailDriverConnector rd)
