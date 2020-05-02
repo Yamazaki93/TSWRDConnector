@@ -47,6 +47,10 @@ Note, you will need to switch the TSW keyboard mappings back to default if you h
  8. If the train is supported (see below for full list of supported trains), your RailDriver will return to display "rd". You may switch window to the connector and see the name of the train being displayed.
  9. That's it. Enjoy.
 
+## RailDriver Key Legends
+
+See [here](https://github.com/Yamazaki93/TSWRDConnector/blob/develop/tsw-rdlegends.docx) for key legeneds for RailDriver function keys. Download and open the file with Google Docs.
+
 ## FAQ & Common Issues
 
 ### How to switch train/cab during a session?
