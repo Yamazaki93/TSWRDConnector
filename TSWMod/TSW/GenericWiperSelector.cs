@@ -5,7 +5,7 @@ namespace TSWMod.TSW
 {
     class GenericWiperSelector : TSWLever
     {
-        public GenericWiperSelector(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr, true)
+        public GenericWiperSelector(Mem m, IntPtr hWnd, UIntPtr basePtr, bool isNotch = true) : base(m, hWnd, basePtr, isNotch)
         {
         }
 

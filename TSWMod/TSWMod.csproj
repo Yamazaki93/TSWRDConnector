@@ -119,6 +119,7 @@
     <Compile Include="TSW\Caltrains\NipponCab.cs" />
     <Compile Include="TSW\Caltrains\NipponCabParkingBrake.cs" />
     <Compile Include="TSW\CSX\AC4400CW.cs" />
+    <Compile Include="TSW\CSX\ContinuousWiperLever.cs" />
     <Compile Include="TSW\CSX\GP38_2.cs" />
     <Compile Include="TSW\CSX\SD40_2AutoBrake.cs" />
     <Compile Include="TSW\CSX\AC4400CWAutoBrake.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="TSW\CSX\PlusMinusReverser.cs" />
     <Compile Include="TSW\CSX\AC4400CWThrottle.cs" />
     <Compile Include="TSW\CSX\EightNotchThrottle.cs" />
+    <Compile Include="TSW\GenericLightSelector.cs" />
     <Compile Include="TSW\GenericWiperSelector.cs" />
     <Compile Include="TSW\DB\DBLightSelector.cs" />
     <Compile Include="TSW\FrenchDefaultKeyboardLayout.cs" />

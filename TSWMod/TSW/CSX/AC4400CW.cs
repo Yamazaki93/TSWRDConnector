@@ -36,6 +36,10 @@ namespace TSWMod.TSW.CSX
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A90)));
             _autoBrake = new AC4400CWAutoBrake(m, hWnd,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A88)));
+            _lightFR = new GenericLightSelector(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A70)));
+            _wiper = new ContinuousWiperLever(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x08E0)));
         }
 
         public bool CheckPlayerCalibration()
@@ -67,6 +71,8 @@ namespace TSWMod.TSW.CSX
             {
                 _independentBrake.EngageBailOffIfNeeded();
             }
+            _lightFR.OnControlLoop(state.LightTranslated);
+            _wiper.OnControlLoop(state.WiperTranslated);
         }
 
         public void Close()
@@ -97,5 +103,7 @@ namespace TSWMod.TSW.CSX
         private readonly PlusMinusReverser _reverser;
         private readonly AC4400CWIndependentBrake _independentBrake;
         private readonly AC4400CWAutoBrake _autoBrake;
+        private readonly GenericLightSelector _lightFR;
+        private readonly ContinuousWiperLever _wiper;
     }
 }
