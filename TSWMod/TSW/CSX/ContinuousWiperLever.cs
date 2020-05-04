@@ -13,11 +13,16 @@ namespace TSWMod.TSW.CSX
         {
         }
 
+        protected override float CurrentValuePreTransform(float raw)
+        {
+            return (float) Math.Round(raw, 1);
+        }
+
         protected override float TargetValuePreTransform(float raw)
         {
             if (raw.AlmostEquals(1))
             {
-                return 0.33f;
+                return 0.5f;
             }
 
             if (raw.AlmostEquals(2))

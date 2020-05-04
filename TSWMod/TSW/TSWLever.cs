@@ -40,6 +40,11 @@ namespace TSWMod.TSW
             if (_rampingUp && _rampUpTimer == 0)
             {
                 _rampingUp = false;
+                if (DiscreteClickRequired)
+                {
+                    InputHelpers.KeyComboUp(_hWnd, _currentKeyDown);
+                    _currentKeyDown = new InputHelpers.VKCodes[]{};
+                }
             }
 
 
@@ -109,6 +114,7 @@ namespace TSWMod.TSW
         {
             InputHelpers.KeyComboUp(_hWnd, IncreaseKeys);
             InputHelpers.KeyComboUp(_hWnd, DecreaseKeys);
+            _currentKeyDown = new InputHelpers.VKCodes[] { };
         }
 
         protected abstract InputHelpers.VKCodes[] IncreaseKeys { get; }
@@ -121,6 +127,7 @@ namespace TSWMod.TSW
 
         protected int NotchCoolOff = 7;  // A cool off period for notch like lever
         protected int NotchRampUp = 0;  // Ramp up period for notch like lever (for slow notches)
+        protected bool DiscreteClickRequired = false;
 
         private InputHelpers.VKCodes[] _currentKeyDown = { };
         private float _previousDiff;

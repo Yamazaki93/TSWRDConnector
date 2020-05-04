@@ -9,9 +9,10 @@ namespace TSWMod.TSW.CSX
 {
     class SD40_2Headlight : GenericLightSelector
     {
-        public SD40_2Headlight(Mem m, IntPtr hWnd, UIntPtr basePtr) : base(m, hWnd, basePtr)
+        public SD40_2Headlight(Mem m, IntPtr hWnd, UIntPtr basePtr, int rampUp = 10, bool discrete = false) : base(m, hWnd, basePtr)
         {
-            NotchRampUp = 10;
+            NotchRampUp = rampUp;
+            DiscreteClickRequired = discrete;
         }
 
         protected override float TargetValuePreTransform(float raw)

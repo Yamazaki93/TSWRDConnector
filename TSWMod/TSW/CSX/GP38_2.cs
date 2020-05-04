@@ -33,20 +33,20 @@ namespace TSWMod.TSW.CSX
 
         public static GP38_2 CreateCSXHeavyHaulVersion(Mem m, UIntPtr basePtr, IntPtr hWnd)
         {
-            return new GP38_2(m, basePtr, hWnd, 0x0938, 0x0928, 0x0930, 0x06C8, 0x0800, 0x0750);
+            return new GP38_2(m, basePtr, hWnd, 0x0938, 0x0928, 0x0930, 0x06C8, 0x0800, 0x0750, 0x0818, 0x0890);
         }
 
         public static GP38_2 CreateNECVersion(Mem m, UIntPtr basePtr, IntPtr hWnd)
         {
-            return new GP38_2(m, basePtr, hWnd, 0x0940, 0x0930, 0x0938, 0x06D0, 0x0808, 0x0758);
+            return new GP38_2(m, basePtr, hWnd, 0x0940, 0x0930, 0x0938, 0x06D0, 0x0808, 0x07580, 0x0820, 0x0898);
         }
 
         public static GP38_2 CreateSFJVersion(Mem m, UIntPtr basePtr, IntPtr hWnd)
         {
-            return new GP38_2(m, basePtr, hWnd, 0x0938, 0x0928, 0x0930, 0x06F0, 0x0800, 0x0758);
+            return new GP38_2(m, basePtr, hWnd, 0x0938, 0x0928, 0x0930, 0x06F0, 0x0800, 0x0758, 0x0818, 0x0890, 0, true);
         }
 
-        private GP38_2(Mem m, UIntPtr basePtr, IntPtr hWnd, int hornOffset, int throttleOffset, int reverserOffset, int independentBrakeOffset, int automaticBrakeOffset, int dynamicBrakeOffset)
+        private GP38_2(Mem m, UIntPtr basePtr, IntPtr hWnd, int hornOffset, int throttleOffset, int reverserOffset, int independentBrakeOffset, int automaticBrakeOffset, int dynamicBrakeOffset, int wiperOffset, int lightOffset, int lightRampUp = 10, bool discrete = false)
         {
             _m = m;
             _basePtr = basePtr;
@@ -62,6 +62,10 @@ namespace TSWMod.TSW.CSX
                 m.GetPtr(m.GetCodeRepresentation(basePtr + automaticBrakeOffset)));
             _dynamicBrake = new SD40_2DynamicBrake(m, hWnd,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + dynamicBrakeOffset)));
+            _wiper = new ContinuousWiperLever(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + wiperOffset)));
+            _light = new SD40_2Headlight(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + lightOffset)), lightRampUp, discrete);
         }
 
         public bool CheckPlayerCalibration()
@@ -94,6 +98,8 @@ namespace TSWMod.TSW.CSX
             {
                 _independentBrake.EngageBailOffIfNeeded();
             }
+            _wiper.OnControlLoop(state.WiperTranslated);
+            _light.OnControlLoop(state.LightTranslated);
         }
 
         public void Close()
@@ -125,5 +131,7 @@ namespace TSWMod.TSW.CSX
         private readonly SD40_2IndependentBrake _independentBrake;
         private readonly SD40_2AutoBrake _autoBrake;
         private readonly SD40_2DynamicBrake _dynamicBrake;
+        private readonly ContinuousWiperLever _wiper;
+        private readonly SD40_2Headlight _light;
     }
 }
