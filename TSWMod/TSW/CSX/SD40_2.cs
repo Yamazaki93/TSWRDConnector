@@ -41,6 +41,10 @@ namespace TSWMod.TSW.CSX
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0908)));
             _dynamicBrake = new SD40_2DynamicBrake(m, hWnd,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0910)));
+            _light = new SD40_2Headlight(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x07C8)));
+            _wiper = new ContinuousWiperLever(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0740)));
         }
 
         public bool CheckPlayerCalibration()
@@ -73,6 +77,8 @@ namespace TSWMod.TSW.CSX
             {
                 _independentBrake.EngageBailOffIfNeeded();
             }
+            _light.OnControlLoop(state.LightTranslated);
+            _wiper.OnControlLoop(state.WiperTranslated);
         }
 
         public void Close()
@@ -104,5 +110,7 @@ namespace TSWMod.TSW.CSX
         private readonly SD40_2IndependentBrake _independentBrake;
         private readonly SD40_2AutoBrake _autoBrake;
         private readonly SD40_2DynamicBrake _dynamicBrake;
+        private readonly SD40_2Headlight _light;
+        private readonly ContinuousWiperLever _wiper;
     }
 }
