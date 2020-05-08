@@ -10,6 +10,7 @@ using TSWMod.RailDriver;
 using TSWMod.TSW.Caltrains;
 using TSWMod.TSW.CSX;
 using TSWMod.TSW.DB;
+using TSWMod.TSW.GWR;
 using TSWMod.TSW.LIRR;
 using TSWMod.TSW.NEC;
 using Timer = System.Timers.Timer;
@@ -274,6 +275,10 @@ namespace TSWMod.TSW
                 else if (possibleName.Contains(NipponCab.NamePartial))
                 {
                     _foundLocomotives.Add(ptr, new NipponCab(_m, ptr, _currentProcess.MainWindowHandle));
+                }
+                else if (possibleName.Contains(HST.NamePartial))
+                {
+                    _foundLocomotives.Add(ptr, new HST(_m, ptr, _currentProcess.MainWindowHandle));
                 }
             }
         }
