@@ -133,6 +133,8 @@
     <Compile Include="TSW\DB\DBLightSelector.cs" />
     <Compile Include="TSW\FrenchDefaultKeyboardLayout.cs" />
     <Compile Include="TSW\GWR\Class66.cs" />
+    <Compile Include="TSW\GWR\Class66AutoBrake.cs" />
+    <Compile Include="TSW\GWR\Class66DirectBrake.cs" />
     <Compile Include="TSW\GWR\HST.cs" />
     <Compile Include="TSW\GWR\HSTBrake.cs" />
     <Compile Include="TSW\GWR\HSTThrottle.cs" />

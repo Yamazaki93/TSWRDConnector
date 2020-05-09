@@ -36,17 +36,32 @@ namespace TSWMod.TSW.GWR
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0648)));
             _hornButtonB = new HornLever(m,
                 m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0640)));
+            _reverserF = new PlusMinusReverser(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0AF8)));
+            _reverserB = new PlusMinusReverser(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0890)));
+            _throttleF = new EightNotchThrottle(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0B00)));
+            _throttleB = new EightNotchThrottle(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0898)));
+            _directBrakeF = new Class66DirectBrake(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A78)));
+            _directBrakeB = new Class66DirectBrake(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0810)));
+            _autoBrakeF = new Class66AutoBrake(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A70)));
+            _autoBrakeB = new Class66AutoBrake(m, hWnd,
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0808)));
         }
 
         public bool CheckPlayerCalibration()
         {
-            if (!_hornButtonF.CurrentValue.AlmostEquals(0.5f))
+            if (!_hornButtonF.CurrentValue.AlmostEquals(0))
             {
                 _hornUse += 1;
                 _rearCab = false;
             }
-
-            if (!_hornButtonB.CurrentValue.AlmostEquals(0.5f))
+            if (!_hornButtonB.CurrentValue.AlmostEquals(0))
             {
                 _hornUse += 1;
                 _rearCab = true;
@@ -62,7 +77,20 @@ namespace TSWMod.TSW.GWR
 
         public void OnControlLoop(RailDriverLeverState state, int[] pressedButtons)
         {
-            _throttle.OnControlLoop(state.ThrottleTranslated);
+            if (_rearCab)
+            {
+                _reverserB.OnControlLoop(state.ReverserTranslated);
+                _throttleB.OnControlLoop(state.ThrottleTranslated);
+                _directBrakeB.OnControlLoop(state.IndependentBrake);
+                _autoBrakeB.OnControlLoop(state.AutoBrakeTranslated);
+            }
+            else
+            {
+                _reverserF.OnControlLoop(state.ReverserTranslated);
+                _throttleF.OnControlLoop(state.ThrottleTranslated);
+                _directBrakeF.OnControlLoop(state.IndependentBrake);
+                _autoBrakeF.OnControlLoop(state.AutoBrakeTranslated);
+            }
         }
 
         public void Close()
@@ -90,7 +118,14 @@ namespace TSWMod.TSW.GWR
         private readonly TSWLever _hornButtonB;
         private readonly Mem _m;
         private readonly UIntPtr _basePtr;
-        private readonly EightNotchThrottle _throttle;
+        private readonly EightNotchThrottle _throttleF;
         private bool _rearCab;
+        private readonly PlusMinusReverser _reverserF;
+        private readonly PlusMinusReverser _reverserB;
+        private readonly EightNotchThrottle _throttleB;
+        private readonly Class66DirectBrake _directBrakeF;
+        private readonly Class66DirectBrake _directBrakeB;
+        private readonly Class66AutoBrake _autoBrakeF;
+        private readonly Class66AutoBrake _autoBrakeB;
     }
 }
