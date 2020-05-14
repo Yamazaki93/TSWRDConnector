@@ -21,7 +21,7 @@ namespace TSWMod.TSW
         public const string ProcessName = "TS2Prototype-Win64-Shipping";
         public static readonly string ProcessBase = ProcessName + ".exe+";
         
-        private const ulong WorldOffset = 0x3CD4358; // Static pointer to world offset from process
+        private const ulong WorldOffset = 0x3CD83D8; // Static pointer to world offset from process
         private const ulong WorldInfoOffset = 0x06f8; // name of the world from world;
         private const ulong Level = 0x0030; // Level offset from world
         private const ulong LevelObjectList = 0x00A0; // Pointer to object list from level offset
