@@ -128,6 +128,8 @@
     <Compile Include="TSW\CSX\AC4400CWThrottle.cs" />
     <Compile Include="TSW\CSX\EightNotchThrottle.cs" />
     <Compile Include="TSW\CSX\SD40_2Headlight.cs" />
+    <Compile Include="TSW\DB\BR422_MasterController.cs" />
+    <Compile Include="TSW\DB\BR422.cs" />
     <Compile Include="TSW\GenericLightSelector.cs" />
     <Compile Include="TSW\GenericWiperSelector.cs" />
     <Compile Include="TSW\DB\DBLightSelector.cs" />
