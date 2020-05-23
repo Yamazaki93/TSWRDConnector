@@ -83,6 +83,10 @@ namespace TSWMod.TSW
             {
                 KeyboardLayoutManager.Current = new FrenchDefaultKeyboardLayout();
             }
+            else if (keyboard == "en-GB")
+            {
+                KeyboardLayoutManager.Current = new GBDefaultKeyboardLayout();
+            }
         }
 
         public JObject GetCurrentLocomotiveConfig()
