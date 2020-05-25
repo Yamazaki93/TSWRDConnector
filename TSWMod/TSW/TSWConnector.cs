@@ -296,6 +296,10 @@ namespace TSWMod.TSW
                 {
                     _foundLocomotives.Add(ptr, new BR422(_m, ptr, _currentProcess.MainWindowHandle));
                 }
+                else if (possibleName.Contains(BR143.NamePartial))
+                {
+                    _foundLocomotives.Add(ptr, new BR143(_m, ptr, _currentProcess.MainWindowHandle));
+                }
             }
         }
 
