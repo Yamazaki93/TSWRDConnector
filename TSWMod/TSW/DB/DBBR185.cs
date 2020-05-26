@@ -9,6 +9,7 @@ namespace TSWMod.TSW.DB
     class DB185_2 : ILocomotive
     {
         public const string NamePartial = "DB_BR185-2";
+        public const string RailionLivery = "MSB_DB_BR185";
         private IDictionary<int, InputHelpers.VKCodes[]> DefaultKeyMappings =>
             new Dictionary<int, InputHelpers.VKCodes[]>
             {
@@ -27,40 +28,40 @@ namespace TSWMod.TSW.DB
                 {43, KeyboardLayoutManager.Current.Horn2},
             };
 
-        public DB185_2(Mem m, UIntPtr basePtr, IntPtr hWnd)
+        public DB185_2(Mem m, UIntPtr basePtr, IntPtr hWnd, int railionOffset = 0x10)
         {
             _m = m;
             _basePtr = basePtr;
             _hornLeverFR = new HornLever(m,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0750)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0740 + railionOffset)));
             _throttleLeverF = new DBThrottleLever(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A18)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A08 + railionOffset)));
             _afbLeverF = new DBAFBLever(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A10)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A00 + railionOffset)));
             _trainBrakeLeverF = new DBTrainBrakeLever(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0A08)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x09F8 + railionOffset)));
             _directBrakeLeverF = new DBDirectBrakeLever(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0948)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0938 + railionOffset)));
             _lightF = new DBLightSelector(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x09E8)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x09D8 + railionOffset)));
             _wiperF = new GenericWiperSelector(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0698)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0688 + railionOffset)));
 
 
             _hornLeverBR = new HornLever(m,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0748)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0738 + railionOffset)));
             _throttleLeverB = new DBThrottleLever(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0848)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0838 + railionOffset)));
             _afbLeverB = new DBAFBLever(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0840)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0830 + railionOffset)));
             _trainBrakeLeverB = new DBTrainBrakeLever(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0838)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0828 + railionOffset)));
             _directBrakeLeverB = new DBDirectBrakeLever(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0720)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0710 + railionOffset)));
             _lightB = new DBLightSelector(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0828)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0818 + railionOffset)));
             _wiperB = new GenericWiperSelector(m, hWnd,
-                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0690)));
+                m.GetPtr(m.GetCodeRepresentation(basePtr + 0x0680 + railionOffset)));
         }
 
         public bool CheckPlayerCalibration()

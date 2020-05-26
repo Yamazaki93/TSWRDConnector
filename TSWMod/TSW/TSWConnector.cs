@@ -235,7 +235,14 @@ namespace TSWMod.TSW
                 }
                 else if (possibleName.Contains(DB185_2.NamePartial))
                 {
-                    _foundLocomotives.Add(ptr, new DB185_2(_m, ptr, _currentProcess.MainWindowHandle));
+                    if (possibleName.Contains(DB185_2.RailionLivery))
+                    {
+                        _foundLocomotives.Add(ptr, new DB185_2(_m, ptr, _currentProcess.MainWindowHandle));
+                    }
+                    else
+                    {
+                        _foundLocomotives.Add(ptr, new DB185_2(_m, ptr, _currentProcess.MainWindowHandle, 0));
+                    }
                 }
                 else if (possibleName.Contains(DB_766pbzfa.NamePartial))
                 {
