@@ -90,10 +90,17 @@ The full list of supported trains and their respective packages:
  - NEC ACS-64
  - NEC GP38-2
  - LIRR M7
+ - SJ SF F40H
+ - SJ SF Nippon Cab
+ - SJ SF GP38-2
+ - RSN BR145
+ - RSN BR185
+ - RNN BR422EMU
+ - RNN BR185
 
 ## Known Issues and Limitations
 
- - Wiper, Lights and other function buttons are NOT supported at the moment. Key legend coming soon.
+ - Wiper, Lights and other function buttons are supported in LIMITED locomotives at the moment.
  - Lever adjustment speed is determined by the game. So it may run slow depending on which lever you are adjusting. But it should still go to the commanded position on RailDriver.
 
 ## Building
