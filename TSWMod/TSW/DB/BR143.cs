@@ -83,15 +83,15 @@ namespace TSWMod.TSW.DB
         {
             if (!_rearCab)
             {
-                _tractionLeverF.OnControlLoop(state.Reverser);
-                _throttleLeverF.OnControlLoop(state.Throttle);
+                _tractionLeverF.OnControlLoop(state.Throttle);
+                _throttleLeverF.OnControlLoop(state.Reverser);
                 _trainBrakeLeverF.OnControlLoop(state.AutoBrakeTranslated);
                 _directBrakeLeverF.OnControlLoop(state.IndependentBrake);
             }
             else
             {
-                _tractionLeverB.OnControlLoop(state.Reverser);
-                _throttleLeverB.OnControlLoop(state.Throttle);
+                _tractionLeverB.OnControlLoop(state.Throttle);
+                _throttleLeverB.OnControlLoop(state.Reverser);
                 _trainBrakeLeverB.OnControlLoop(state.AutoBrakeTranslated);
                 _directBrakeLeverB.OnControlLoop(state.IndependentBrake);
             }
